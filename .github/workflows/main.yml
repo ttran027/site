@@ -36,8 +36,3 @@ jobs:
         build_dir: ${{ env.PUBLISH_DIR }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    # Generate the website
-    - name: Publish
-      run: |
-        cp wwwroot/index.html wwwroot/404.html
-        dotnet publish myapp.csproj --configuration Release
