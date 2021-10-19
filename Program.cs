@@ -18,7 +18,7 @@ namespace Website.Personal
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
-            services.AddHttpClient("coinbase", c =>
+            builder.Services.AddHttpClient("coinbase", c =>
             {
                 c.BaseAddress = new Uri("https://api.coinbase.com/v2/");
             });
