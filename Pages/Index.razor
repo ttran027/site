@@ -15,7 +15,8 @@ Welcome to your new app.
     protected override async Task OnInitializedAsync()
     {
         var client = httpClientFactory.CreateClient("coinbase");
-        var result = await client.GetFromJsonAsync<string>("prices/btc-usd/spot");
-        response = result ?? "None";
+        var result = await client.GetAsync("prices/btc-usd/spot");
+        var content = await result.Content.ReadAsStringAsync();
+        response = content ?? "None";
     }
 }
