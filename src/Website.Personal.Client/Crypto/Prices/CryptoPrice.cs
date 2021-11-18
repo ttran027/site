@@ -6,5 +6,4 @@
         string Base,
         double Amount
     );
-
 }
