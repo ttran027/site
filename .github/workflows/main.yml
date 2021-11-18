@@ -1,6 +1,6 @@
 name: Deploy Blazor WASM to GitHub Page
 env:
-  PUBLISH_DIR: src/Website.Personal.Clientbin/Release/net6.0/publish/wwwroot
+  PUBLISH_DIR: release/wwwroot
 # Controls when the action will run
 on:
   push:
@@ -18,7 +18,7 @@ jobs:
           include-prerelease: true
     
     - name: Publish application
-      run: dotnet publish src/Website.Personal.Client/Website.Personal.Client.csproj -c Release
+      run: dotnet publish src/Website.Personal.Client/Website.Personal.Client.csproj -c Release -o release --nologo
     
     # base href url value should be changed so that resources like CSS and scripts can load properly. 
     - name: Rewrite base href
