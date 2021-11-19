@@ -1,6 +1,4 @@
-﻿using FluentResults;
-using MediatR;
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 
 namespace Website.Personal.Client.Crypto.Prices
 {
@@ -17,10 +15,10 @@ namespace Website.Personal.Client.Crypto.Prices
         {
             return await Result.Try(async () =>
             {
-                var response = await _httpClient.GetFromJsonAsync<CoinbaseCryptoPriceResponse>($"prices/{request.Ticker}-usd/sell");
-                return new CryptoPrice(response.Data.Base, response.Data.Currency, double.Parse(response.Data.Amount));
+                var response = await _httpClient.GetFromJsonAsync<CoinbaseCryptoPriceResponse>($"prices/{request.CryptoInfo.Ticker}-usd/sell");
+                return new CryptoPrice(request.CryptoInfo, response.Data.Currency, double.Parse(response.Data.Amount));
             },
-            ex => new Error("Failed to get price of " + request.Ticker + ": " + ex.Message));
+            ex => new Error("Failed to get price of " + request.CryptoInfo.Ticker + ": " + ex.Message));
         }
     }
 

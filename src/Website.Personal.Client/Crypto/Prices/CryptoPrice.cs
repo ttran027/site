@@ -2,7 +2,7 @@
 {
     public record CryptoPrice
     (
-        string Ticker,
+        CryptoInfo Crypto,
         string Base,
         double Amount
     );

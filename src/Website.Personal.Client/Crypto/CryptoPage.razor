@@ -1,3 +1,11 @@
 ﻿@page "/crypto"
 
-<PageTitle>Crypto</PageTitle>
+<MudTable Items="@CryptoExtensions.SupportedCrypto" Hover="true" Breakpoint="Breakpoint.Sm" Filter="Search">
+    <ToolBarContent>
+        <MudTextField @bind-Value="_searchString" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+    <RowTemplate>
+        <MudTd>@context.Name</MudTd>
+        <MudTd>@context.Ticker</MudTd>
+    </RowTemplate>
+</MudTable>
