@@ -24,6 +24,11 @@ a, .btn-link {
     outline: 1px solid #26b050;
 }
 
+.fit-content {
+    width: auto;
+    max-width: fit-content;
+}
+
 .invalid {
     outline: 1px solid red;
 }

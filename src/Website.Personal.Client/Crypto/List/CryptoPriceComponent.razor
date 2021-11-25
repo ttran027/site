@@ -1,0 +1,22 @@
+﻿<div class="d-flex crypto-price">
+    <img class="crypto-logo mr-3" src="@($"./img/icons/{CryptoInfo.Ticker}.png")">
+    <div class="d-flex flex-column">
+        <span>@CryptoInfo.Name</span>
+        <span>@CryptoInfo.Ticker</span>
+    </div>
+    <div class="d-flex flex-column">
+        @if(_loading)
+        {
+            <MudProgressCircular Size="Size.Small" Color="Color.Default" Indeterminate="true" />
+        }
+        else
+        {
+            <span>
+                @(Price is null ? "Unavailable" : Price.Amount.ToPrice())
+            </span>
+            <span>
+                @PriceChangePercent?.ToPercent()
+            </span>
+        }      
+    </div>
+</div>

@@ -4,19 +4,22 @@ namespace Website.Personal.Client.Crypto.Prices
 {
     public class CryptoPriceQueryHandler : IRequestHandler<CryptoPriceQuery, Result<CryptoPrice>>
     {
-        private readonly HttpClient _httpClient;
+        private readonly HttpClient _coinbase;
+        
 
         public CryptoPriceQueryHandler(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClientFactory.CreateClient("coinbase");
+            _coinbase = httpClientFactory.CreateClient("coinbase");
         }
 
         public async Task<Result<CryptoPrice>> Handle(CryptoPriceQuery request, CancellationToken cancellationToken)
         {
             return await Result.Try(async () =>
             {
-                var response = await _httpClient.GetFromJsonAsync<CoinbaseCryptoPriceResponse>($"prices/{request.CryptoInfo.Ticker}-usd/sell");
-                return new CryptoPrice(request.CryptoInfo, response.Data.Currency, double.Parse(response.Data.Amount));
+                var coinbaseResponse = await _coinbase.GetFromJsonAsync<CoinbaseCryptoPriceResponse>($"prices/{request.CryptoInfo.Ticker}-usd/spot");
+                return new CryptoPrice(request.CryptoInfo,
+                    coinbaseResponse.Data.Currency,
+                    double.Parse(coinbaseResponse.Data.Amount));
             },
             ex => new Error("Failed to get price of " + request.CryptoInfo.Ticker + ": " + ex.Message));
         }

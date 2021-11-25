@@ -1,0 +1,17 @@
+﻿.crypto-logo {
+    width: auto;
+    max-width: 40px;
+}
+
+.crypto-price {
+    width: auto;
+    max-width: fit-content;
+}
+
+.crypto-price div:nth-child(2) {
+    width: 245px;
+}
+
+.crypto-price div:nth-child(3) {
+    width: 80px;
+}

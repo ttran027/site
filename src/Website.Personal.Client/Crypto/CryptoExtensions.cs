@@ -11,5 +11,15 @@
         }
 
         public static List<CryptoInfo> SupportedCrypto => List.Select(e => e.ToCryptoInfo()).ToList();
+
+        public static RenderFragment ToPercent(this string p) => builder =>
+        {
+            builder.OpenElement(0, "span");
+            var isNegative = p.StartsWith("-");
+            var color = isNegative ? "red-text" : "green-text";
+            builder.AddAttribute(1, "class", color);
+            builder.AddContent(2, (isNegative ? p : $"+{p}") + "%");
+            builder.CloseElement();
+        };
     }
 }
