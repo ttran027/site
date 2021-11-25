@@ -1,3 +1,21 @@
+/* /Crypto/List/CryptoPriceComponent.razor.rz.scp.css */
+.crypto-logo[b-9e6b7wk7vq] {
+    width: auto;
+    max-width: 40px;
+}
+
+.crypto-price[b-9e6b7wk7vq] {
+    width: auto;
+    max-width: fit-content;
+}
+
+.crypto-price div:nth-child(2)[b-9e6b7wk7vq] {
+    width: 245px;
+}
+
+.crypto-price div:nth-child(3)[b-9e6b7wk7vq] {
+    width: 80px;
+}
 /* /Shared/MainLayout.razor.rz.scp.css */
 .page[b-pt8rv0w4qy] {
     position: relative;
