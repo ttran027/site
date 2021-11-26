@@ -1,6 +1,6 @@
 ﻿<MudTable RowsPerPage="5" Items="@CryptoExtensions.SupportedCrypto" Hover="true" Breakpoint="Breakpoint.Sm" Filter="Search" Class="fit-content">
     <ToolBarContent>
-        <MudTextField @bind-Value="_searchString" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        <MudTextField @bind-Value="_searchString" Immediate Clearable DebounceInterval="300" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
     </ToolBarContent>
     <RowTemplate>
         <MudTd>
