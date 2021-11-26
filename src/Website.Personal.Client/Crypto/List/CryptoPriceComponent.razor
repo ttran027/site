@@ -1,8 +1,7 @@
 ﻿<div class="d-flex crypto-price">
-    <img class="crypto-logo mr-3" src="@($"./img/icons/{CryptoInfo.Ticker}.png")">
     <div class="d-flex flex-column">
         <span>@CryptoInfo.Name</span>
-        <span>@CryptoInfo.Ticker</span>
+        <span style="@($"color:{Theme.Palette.TextSecondary}")">@CryptoInfo.Ticker</span>
     </div>
     <div class="d-flex flex-column">
         @if(_loading)
