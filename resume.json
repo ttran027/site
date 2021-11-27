@@ -1,0 +1,52 @@
+{
+  "summary": "I'm a motivated .Net developer who enjoy learning and implementing new technologies.",
+  "email": "tdtran04@gmail.com",
+  "fullName": "Thinh Tran",
+  "skills": [
+    "Proficient languages: C#, Typescript and HTML",
+    "Proficient frameworks: ASP .Net, Blazor and Angular",
+    "Proficient source control: Azure DevOps",
+    "Proficient IDE: Visual Studio and Visual Studio Code",
+    "Some experience in SQL"
+  ],
+  "educations": [
+    {
+      "institution": "Old Dominion University",
+      "location": {
+        "city": "Norfolk",
+        "state": "VA"
+      },
+      "degree": "Bachelor of Science in Computer Science",
+      "graduationDate": "2020-05-09T00:00:00",
+      "grade": 3.47
+    },
+    {
+      "institution": "Old Dominion University",
+      "location": {
+        "city": "Norfolk",
+        "state": "VA"
+      },
+      "degree": "Bachelor of Science in Electrical Engineering Technology",
+      "graduationDate": "2016-05-05T00:00:00",
+      "grade": 3.46
+    }
+  ],
+  "experiences": [
+    {
+      "company": "CDYNE Corporation",
+      "location": {
+        "city": "Chesapeake",
+        "state": "VA"
+      },
+      "position": "Software Development Intern",
+      "startDate": "2021-01-20T00:00:00",
+      "endDate": null,
+      "responsibitites": [
+        "Creates web pages and API endpoints as directed by team lead and software documentation",
+        "Creates SQL procedures and views as needed for application development",
+        "Attends daily development meetings to review development plans",
+        "Writes and refactors C# codes"
+      ]
+    }
+  ]
+}
