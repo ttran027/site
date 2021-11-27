@@ -8,6 +8,12 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddMediatR(typeof(Program));
+
+builder.Services.AddHttpClient("local", httpClient =>
+{
+    httpClient.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+});
+
 builder.Services.AddHttpClient("coinbase", httpClient =>
 {
     httpClient.BaseAddress = new Uri("https://api.coinbase.com/v2/");
