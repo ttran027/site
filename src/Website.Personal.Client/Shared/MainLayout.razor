@@ -1,18 +1,17 @@
 ﻿@inherits LayoutComponentBase
 
 <MudLayout>
-    <MudAppBar Class="d-flex justify-space-between">
-        <MudContainer>
+    <MudAppBar>
+        <MudContainer Class="fit-content">
             <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
             Thinh's Homepage
         </MudContainer>
-        <MudContainer Class="fit-content">
-            <MudTooltip Text="GitHub Repository">
-                <MudLink Href="https://github.com/ttran027/site">
-                    <MudIcon Icon="@Icons.Custom.Brands.GitHub" Color="Color.Primary"/>
-                </MudLink>
-            </MudTooltip>
-        </MudContainer>   
+        <MudSpacer/>
+        <MudTooltip Text="GitHub Repository">
+            <MudLink Href="https://github.com/ttran027/site">
+                <MudIcon Icon="@Icons.Custom.Brands.GitHub" Color="Color.Primary"/>
+            </MudLink>
+        </MudTooltip>
     </MudAppBar>
     <MudDrawer @bind-Open="@_drawerOpen">
         <NavMenu/>
