@@ -1,7 +1,12 @@
 ﻿
 <MudNavMenu Class="mud-width-full">
-    <MudNavLink Href="/profile" Icon="@Icons.Outlined.PersonOutline">Profile</MudNavLink>
+    <MudNavLink Href="profile" Icon="@Icons.Outlined.PersonOutline">Profile</MudNavLink>
+    <NavLink class="nav-link" href="profile" Match="NavLinkMatch.All">
+            <MudIcon Icon="@Icons.Outlined.PersonOutline" Class="mr-1"/> Profile
+        </NavLink>
     <MudNavGroup Title="Blazor Components" Icon="@Icons.Outlined.SpaceDashboard" Expanded="true">
-        <MudNavLink Href="/crypto" Icon="@Icons.Outlined.AttachMoney">Crypto</MudNavLink>
+        <NavLink class="nav-link" href="crypto">
+            <MudIcon Icon="@Icons.Outlined.AttachMoney" Class="mr-1"/> Crypto
+        </NavLink>
     </MudNavGroup>
 </MudNavMenu>
