@@ -1,6 +1,14 @@
-﻿<div class="@Class">
+﻿@using Website.Personal.Client.Common
+
+<div class="@Class">
     <MudPaper Class="d-flex flex-column pa-5 fit-content">
-        <h2 style="@($"color:{Theme.Palette.TextSecondary}")">Gain Calculator</h2>
+        <div class="d-flex flex-row align-end">
+            <MudText Class="mr-2" Color="Color.Secondary" Typo="Typo.h5">Gain Calculator</MudText>
+            <IconLink Icon="@Icons.Custom.Brands.GitHub"
+                      Size="@Size.Small"    
+                      Href="https://github.com/ttran027/site/tree/master/src/Website.Personal.Client/Crypto/GainCalculator"
+                      TooltipText="Source Code"/>
+        </div>
         <MudNumericField Class="mb-2" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" @bind-Value="Inputs.PurchasedPrice" Label="Purchased Price" HideSpinButtons Immediate DebounceInterval="300" OnDebounceIntervalElapsed="Calculate"/>
         <MudNumericField Class="mb-2" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" @bind-Value="Inputs.SellPrice" Label="Selling Price" HideSpinButtons Immediate DebounceInterval="300" OnDebounceIntervalElapsed="Calculate"/>
         <MudNumericField Class="mb-2" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" @bind-Value="Inputs.Amount" Label="Amount" HideSpinButtons Immediate DebounceInterval="300" OnDebounceIntervalElapsed="Calculate"/>
@@ -20,9 +28,6 @@
 
     [Parameter]
     public string Class { get; set; } = string.Empty;
-
-    [Inject]
-    private MudTheme Theme { get; set; } = null!;
 
     private void Calculate()
     {

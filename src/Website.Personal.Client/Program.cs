@@ -39,6 +39,7 @@ builder.Services.AddSingleton<MudTheme>(new MudTheme()
             AppbarText = "rgba(255,255,255, 0.70)",
             TextPrimary = "#e8eaed",
             TextSecondary = "#9aa0a6",
+            Secondary = "#9aa0a6",
             ActionDefault = "#adadb1",
             ActionDisabled = "rgba(255,255,255, 0.26)",
             ActionDisabledBackground = "rgba(255,255,255, 0.12)",

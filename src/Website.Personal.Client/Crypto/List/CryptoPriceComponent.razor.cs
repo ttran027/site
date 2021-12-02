@@ -13,9 +13,6 @@ namespace Website.Personal.Client.Crypto.List
         public CryptoInfo CryptoInfo { get; set; } = null!;
 
         [Inject]
-        private MudTheme Theme { get; set; } = null!;
-
-        [Inject]
         private IMediator Mediator { get; set; } = null!;
 
         protected override async Task OnInitializedAsync()

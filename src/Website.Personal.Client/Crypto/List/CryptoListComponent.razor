@@ -1,16 +1,27 @@
-﻿<MudTable RowsPerPage="5" Items="@CryptoExtensions.SupportedCrypto" Hover="true" Breakpoint="Breakpoint.Sm" Filter="Search" Class="fit-content">
-    <ToolBarContent>
-        <MudTextField @bind-Value="_searchString" Immediate Clearable DebounceInterval="300" Placeholder="Search for crypto prices" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
-    </ToolBarContent>
-    <RowTemplate>
-        <MudTd>
-            <CryptoPriceComponent CryptoInfo="context"/>
-        </MudTd>
-    </RowTemplate>
-    <PagerContent>
-        <MudTablePager HideRowsPerPage/>
-    </PagerContent>
-</MudTable>
+﻿@using Website.Personal.Client.Common
+
+<MudPaper Class="d-flex flex-column al pa-5 fit-content">
+    <div class="d-flex flex-row align-end">
+            <MudText Class="mx-2" Color="Color.Secondary" Typo="Typo.h5">Crypto List</MudText>
+            <IconLink Icon="@Icons.Custom.Brands.GitHub"
+                      Size="@Size.Small"    
+                      Href="https://github.com/ttran027/site/tree/master/src/Website.Personal.Client/Crypto/List"
+                      TooltipText="Source Code"/>
+        </div>
+    <MudTable Elevation="0" RowsPerPage="5" Items="@CryptoExtensions.SupportedCrypto" Hover="true" Breakpoint="Breakpoint.Sm" Filter="Search" Class="fit-content">
+        <ToolBarContent>
+            <MudTextField @bind-Value="_searchString" Immediate Clearable DebounceInterval="300" Placeholder="Search for crypto prices" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        </ToolBarContent>
+        <RowTemplate>
+            <MudTd>
+                <CryptoPriceComponent CryptoInfo="context"/>
+            </MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager HideRowsPerPage/>
+        </PagerContent>
+    </MudTable>
+</MudPaper>
 
 @code {
     private string _searchString = string.Empty;

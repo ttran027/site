@@ -1,4 +1,5 @@
-﻿@inherits LayoutComponentBase
+﻿@using Website.Personal.Client.Common
+@inherits LayoutComponentBase
 
 <MudLayout>
     <MudAppBar>
@@ -7,11 +8,9 @@
             Thinh's Homepage
         </MudContainer>
         <MudSpacer/>
-        <MudTooltip Text="GitHub Repository">
-            <MudLink Href="https://github.com/ttran027/site">
-                <MudIcon Icon="@Icons.Custom.Brands.GitHub" Color="Color.Primary"/>
-            </MudLink>
-        </MudTooltip>
+        <IconLink Icon="@Icons.Custom.Brands.GitHub"
+                  Href="https://github.com/ttran027/site"
+                  TooltipText="GitHub Repository"/>
     </MudAppBar>
     <MudDrawer @bind-Open="@_drawerOpen">
         <NavMenu/>
