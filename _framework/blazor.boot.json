@@ -2,11 +2,12 @@
   "cacheBootResources": true,
   "config": [ ],
   "debugBuild": false,
-  "entryAssembly": "Website.Personal.Client",
+  "entryAssembly": "Client",
   "icuDataMode": 0,
   "linkerEnabled": true,
   "resources": {
     "assembly": {
+      "Client.dll": "sha256-2yX8whU\/pgyypQlxPigWyfcjdCM+Ae8CgqHCtJBfuWs=",
       "FluentResults.dll": "sha256-BMLd8c6xAxrXZrp0GlidCfr5thxd0XO7PBhoRrLzcI4=",
       "FluentValidation.dll": "sha256-CvoEqBeiOYE8ZZ8p4UGWLrZ+DxN32ckWTuaKiA7DjWg=",
       "MediatR.dll": "sha256-fQTLMGLCCX5kLC\/epoTUwFSME++hDMWmDcXy2s+i968=",
@@ -56,8 +57,7 @@
       "System.Text.Encodings.Web.dll": "sha256-wpoIHsG+HQYfKV\/LKarpVXK2PbZYvgTPWpbVVJq210Y=",
       "System.Text.Json.dll": "sha256-TSy7QV+fSunsxhb6TmQnboL1GIdEdkmby4nYEWwFMmQ=",
       "System.Text.RegularExpressions.dll": "sha256-KOonR8Hn+ux5x3U5mKOjAxSIaUo5oU9piK6YlU3IehY=",
-      "System.Threading.dll": "sha256-E\/DVQ3u\/jrdSYT6O1lIvqqypI5iG\/jo0Cc\/kjh9L8F8=",
-      "Website.Personal.Client.dll": "sha256-cRQQJeP\/XtBfKmG5J4ChhpbkFrgwsZ+07Hn5Op825Hc="
+      "System.Threading.dll": "sha256-E\/DVQ3u\/jrdSYT6O1lIvqqypI5iG\/jo0Cc\/kjh9L8F8="
     },
     "extensions": null,
     "lazyAssembly": null,
