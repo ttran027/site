@@ -1,0 +1,42 @@
+﻿@using Client.Common
+
+<div class="@Class">
+    <MudPaper Class="d-flex flex-column pa-5 fit-content">
+        <MudNumericField Class="mb-2" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" @bind-Value="Inputs.PurchasedPrice" Label="Purchased Price" HideSpinButtons Immediate DebounceInterval="300" OnDebounceIntervalElapsed="Calculate"/>
+        <MudNumericField Class="mb-2" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" @bind-Value="Inputs.SellPrice" Label="Selling Price" HideSpinButtons Immediate DebounceInterval="300" OnDebounceIntervalElapsed="Calculate"/>
+        <MudNumericField Class="mb-2" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" @bind-Value="Inputs.Amount" Label="Amount" HideSpinButtons Immediate DebounceInterval="300" OnDebounceIntervalElapsed="Calculate"/>
+        <MudButton Variant="Variant.Filled" Size="Size.Small" W Color="Color.Primary" OnClick="Reset" Class="fit-content">Reset</MudButton>
+        <MudPaper Outlined Elevation="3" Class="d-flex flex-column pa-3 mt-3 align-center" MinWidth="317px">
+            <div class="d-flex flex-row">
+                <h3 class="mr-2">@(Outputs.Gain >= 0 ? "Gain:" : "Loss:")</h3>
+                <h3 class="mr-2">@Outputs.Gain.ToString("C")</h3>
+                <h3 class="@(Outputs.Gain >= 0 ? "green-text" : "red-text")">@Outputs.GainRate.ToString("P")</h3>
+            </div>
+        </MudPaper> 
+    </MudPaper>
+</div>
+@code {
+    private GainCalculatorInput Inputs = new();
+    private GainCalculatorOutput Outputs = new();
+
+    [Parameter]
+    public string Class { get; set; } = string.Empty;
+
+    private void Calculate()
+    {
+        var validator = new GainCalculatorInputValidator();
+        var validationResult = validator.Validate(Inputs);
+        if (validationResult.IsValid)
+        {
+            var gainRate = (Inputs.SellPrice - Inputs.PurchasedPrice)/Inputs.PurchasedPrice;
+            Outputs.GainRate = gainRate;
+            Outputs.Gain = gainRate * Inputs.Amount;
+        }
+    }
+
+    private void Reset()
+    {
+        Inputs = new();
+        Outputs = new();
+    }
+}
