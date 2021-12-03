@@ -16,7 +16,7 @@ jobs:
           include-prerelease: true
     
     - name: Publish application
-      run: dotnet publish src/Website.Personal.Client/Website.Personal.Client.csproj -c Release -o release --nologo
+      run: dotnet publish src/Client/Client.csproj -c Release -o release --nologo
 
     # add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project. (Allow files and folders starting with an underscore)
     - name: Add .nojekyll file
