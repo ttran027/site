@@ -1,10 +1,21 @@
 ﻿<MudTooltip Text="@TooltipText">
-    <MudLink Href="@Href">
-        <MudIcon Icon="@Icon" Color="@Color" Size="@Size"/>
+    <MudLink Href="@Href" Target="@_target">
+        <MudIcon Style="@Style" Class="@Class" Icon="@Icon" Color="@Color" Size="@Size"/>
     </MudLink>
 </MudTooltip>
 
 @code{
+    private string _target = string.Empty;
+
+    [Parameter]
+    public bool NewTab { get => NewTab; set => _target = value ? "_blank" : string.Empty; }
+
+    [Parameter]
+    public string? Class { get; set; }
+
+    [Parameter]
+    public string? Style { get; set; }
+
     [Parameter]
     [EditorRequired]
     public string Icon { get; set; }

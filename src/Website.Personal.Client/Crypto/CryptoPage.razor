@@ -1,7 +1,16 @@
 ﻿@page "/crypto"
+@using Website.Personal.Client.Common
 @using Website.Personal.Client.Crypto.List
 @using Website.Personal.Client.Crypto.GainCalculator
-<div>
-    <GainCalculatorComponent Class="mb-4"/>
-    <CryptoListComponent/>
-</div>
+<MudContainer>
+    <MudExpansionPanels MultiExpansion="true">
+        <MudExpansionPanel Style="@PanelStyle" 
+                           TitleContent="@GetTitle("Gain Calculator", "https://github.com/ttran027/site/tree/master/src/Website.Personal.Client/Crypto/GainCalculator")">     
+            <GainCalculatorComponent/>
+        </MudExpansionPanel>
+        <MudExpansionPanel Style="@PanelStyle" 
+                           TitleContent="@GetTitle("Crypto List", "https://github.com/ttran027/site/tree/master/src/Website.Personal.Client/Crypto/List")">         
+            <CryptoListComponent/>  
+        </MudExpansionPanel>
+    </MudExpansionPanels>
+</MudContainer>
