@@ -1,32 +1,32 @@
-/* /Crypto/List/CryptoPriceComponent.razor.rz.scp.css */
-.crypto-price[b-g417znxkgt] {
+/* /Components/Crypto/List/CryptoPriceComponent.razor.rz.scp.css */
+.crypto-price[b-ghmbzufkqt] {
     width: auto;
     max-width: fit-content;
 }
 
-.crypto-price div:nth-child(1)[b-g417znxkgt] {
+.crypto-price div:nth-child(1)[b-ghmbzufkqt] {
     width: 245px;
 }
 
-.crypto-price div:nth-child(2)[b-g417znxkgt] {
+.crypto-price div:nth-child(2)[b-ghmbzufkqt] {
     width: 80px;
 }
-/* /Shared/MainLayout.razor.rz.scp.css */
-.page[b-ue12j0c5j8] {
+/* /Components/Layouts/MainLayout.razor.rz.scp.css */
+.page[b-5jal6u73za] {
     position: relative;
     display: flex;
     flex-direction: column;
 }
 
-main[b-ue12j0c5j8] {
+main[b-5jal6u73za] {
     flex: 1;
 }
 
-.sidebar[b-ue12j0c5j8] {
+.sidebar[b-5jal6u73za] {
     background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
 }
 
-.top-row[b-ue12j0c5j8] {
+.top-row[b-5jal6u73za] {
     background-color: #f7f7f7;
     border-bottom: 1px solid #d6d5d5;
     justify-content: flex-end;
@@ -35,99 +35,99 @@ main[b-ue12j0c5j8] {
     align-items: center;
 }
 
-    .top-row[b-ue12j0c5j8]  a, .top-row[b-ue12j0c5j8]  .btn-link {
+    .top-row[b-5jal6u73za]  a, .top-row[b-5jal6u73za]  .btn-link {
         white-space: nowrap;
         margin-left: 1.5rem;
         text-decoration: none;
     }
 
-    .top-row[b-ue12j0c5j8]  a:hover, .top-row[b-ue12j0c5j8]  .btn-link:hover {
+    .top-row[b-5jal6u73za]  a:hover, .top-row[b-5jal6u73za]  .btn-link:hover {
         text-decoration: underline;
     }
 
-    .top-row[b-ue12j0c5j8]  a:first-child {
+    .top-row[b-5jal6u73za]  a:first-child {
         overflow: hidden;
         text-overflow: ellipsis;
     }
 
 @media (max-width: 640.98px) {
-    .top-row:not(.auth)[b-ue12j0c5j8] {
+    .top-row:not(.auth)[b-5jal6u73za] {
         display: none;
     }
 
-    .top-row.auth[b-ue12j0c5j8] {
+    .top-row.auth[b-5jal6u73za] {
         justify-content: space-between;
     }
 
-    .top-row[b-ue12j0c5j8]  a, .top-row[b-ue12j0c5j8]  .btn-link {
+    .top-row[b-5jal6u73za]  a, .top-row[b-5jal6u73za]  .btn-link {
         margin-left: 0;
     }
 }
 
 @media (min-width: 641px) {
-    .page[b-ue12j0c5j8] {
+    .page[b-5jal6u73za] {
         flex-direction: row;
     }
 
-    .sidebar[b-ue12j0c5j8] {
+    .sidebar[b-5jal6u73za] {
         width: 250px;
         height: 100vh;
         position: sticky;
         top: 0;
     }
 
-    .top-row[b-ue12j0c5j8] {
+    .top-row[b-5jal6u73za] {
         position: sticky;
         top: 0;
         z-index: 1;
     }
 
-    .top-row.auth[b-ue12j0c5j8]  a:first-child {
+    .top-row.auth[b-5jal6u73za]  a:first-child {
         flex: 1;
         text-align: right;
         width: 0;
     }
 
-    .top-row[b-ue12j0c5j8], article[b-ue12j0c5j8] {
+    .top-row[b-5jal6u73za], article[b-5jal6u73za] {
         padding-left: 2rem !important;
         padding-right: 1.5rem !important;
     }
 }
-/* /Shared/NavMenu.razor.rz.scp.css */
-.navbar-toggler[b-dwvujiiut8] {
+/* /Components/Layouts/NavMenu.razor.rz.scp.css */
+.navbar-toggler[b-d5xj510knl] {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-.top-row[b-dwvujiiut8] {
+.top-row[b-d5xj510knl] {
     height: 3.5rem;
     background-color: rgba(0,0,0,0.4);
 }
 
-.navbar-brand[b-dwvujiiut8] {
+.navbar-brand[b-d5xj510knl] {
     font-size: 1.1rem;
 }
 
-.oi[b-dwvujiiut8] {
+.oi[b-d5xj510knl] {
     width: 2rem;
     font-size: 1.1rem;
     vertical-align: text-top;
     top: -2px;
 }
 
-.nav-item[b-dwvujiiut8] {
+.nav-item[b-d5xj510knl] {
     font-size: 0.9rem;
     padding-bottom: 0.5rem;
 }
 
-    .nav-item:first-of-type[b-dwvujiiut8] {
+    .nav-item:first-of-type[b-d5xj510knl] {
         padding-top: 1rem;
     }
 
-    .nav-item:last-of-type[b-dwvujiiut8] {
+    .nav-item:last-of-type[b-d5xj510knl] {
         padding-bottom: 1rem;
     }
 
-    .nav-item[b-dwvujiiut8]  a {
+    .nav-item[b-d5xj510knl]  a {
         color: #d7d7d7;
         border-radius: 4px;
         height: 3rem;
@@ -136,22 +136,22 @@ main[b-ue12j0c5j8] {
         line-height: 3rem;
     }
 
-.nav-item[b-dwvujiiut8]  a.active {
+.nav-item[b-d5xj510knl]  a.active {
     background-color: rgba(255,255,255,0.25);
     color: white;
 }
 
-.nav-item[b-dwvujiiut8]  a:hover {
+.nav-item[b-d5xj510knl]  a:hover {
     background-color: rgba(255,255,255,0.1);
     color: white;
 }
 
 @media (min-width: 641px) {
-    .navbar-toggler[b-dwvujiiut8] {
+    .navbar-toggler[b-d5xj510knl] {
         display: none;
     }
 
-    .collapse[b-dwvujiiut8] {
+    .collapse[b-d5xj510knl] {
         /* Never collapse the sidebar for wide screens */
         display: block;
     }
