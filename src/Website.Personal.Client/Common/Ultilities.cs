@@ -8,5 +8,8 @@
         }
 
         public static int[] PageSize(int size) => new[] { size };
+
+        public static DateTime EnsureStartOfMonth(this DateTime date)
+            => new(date.Year, date.Month, 1); 
     }
 }

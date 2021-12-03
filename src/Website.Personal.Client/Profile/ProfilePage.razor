@@ -26,8 +26,9 @@
                             <span>@exp?.Company, @exp?.Location.City, @exp?.Location.State</span>
                             <span class="orange-text">@exp?.Position</span>
                         </div>
-                        <div>
-                            @($"{exp?.StartDate.ToString("MMMM yyyy")} - ")@(exp?.EndDate is null ? "Current" : exp?.EndDate?.ToString("MMMM yyyy"))
+                        <div class="d-flex flex-column align-center">
+                            <span>@exp?.ToStartEndMonths()</span>
+                            <span>(@exp?.ToMonthsYearsLength())</span>
                         </div>                   
                     </div>
                     <div class="d-flex flex-column">
