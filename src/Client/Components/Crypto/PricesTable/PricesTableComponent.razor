@@ -1,0 +1,53 @@
+﻿<MudPaper Class="d-flex flex-column al pa-5 fit-content">
+    <MudTable Elevation="0" RowsPerPage="5" Items="@Assets" Hover="true" Breakpoint="Breakpoint.Sm" Filter="Search" Class="fit-content">
+        <ToolBarContent>
+            <MudTextField @bind-Value="_searchString" Immediate Clearable DebounceInterval="300" Placeholder="Search for crypto prices" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        </ToolBarContent>
+        <RowTemplate>
+            <MudTd>
+                <div class="d-flex flex-row">
+                    <div class="d-flex flex-column" style="width: 245px;">
+                        <span>@context.Symbol</span>
+                        @if (context.Name is not null)
+                        {
+                            <MudText Color="Color.Secondary">@context.Name</MudText>
+                        }                    
+                   </div>
+                   <CryptoPriceComponent Symbol="@context.Symbol" GetPrice="GetPrice"/>
+                </div>        
+            </MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager HideRowsPerPage/>
+        </PagerContent>
+    </MudTable>
+</MudPaper>
+
+@code {
+    private string _searchString = string.Empty;
+    private bool _loading;
+
+    /// <summary>
+    /// A function that takes in symbol name as <see cref="string"/> and returns <seealso cref="CryptoPrice"/>.
+    /// This function must be passed to display the price.
+    /// </summary>
+    [Parameter]
+    [EditorRequired]
+    public Func<string, Task<CryptoPrice>> GetPrice { get; set; }
+
+    /// <summary>
+    /// A list of crypto assets to be supported int this table
+    /// </summary>
+    [Parameter]
+    public ICollection<CryptoInfo> Assets { get; set; }
+
+    private bool Search(CryptoInfo info)
+    {
+        if (!string.IsNullOrEmpty(_searchString))
+        {
+            return info.Name.Contains(_searchString, StringComparison.OrdinalIgnoreCase) ||
+                    info.Symbol.Contains(_searchString, StringComparison.OrdinalIgnoreCase);
+        }
+        return true;
+    }
+}

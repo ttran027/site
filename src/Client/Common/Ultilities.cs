@@ -4,7 +4,7 @@
     {
         public static string ToPrice(this double p)
         {
-            return p > 0.0001 ? $"${p:N}" : $"${p:f6}";
+            return p > 0.0001 ? $"{p:N2}" : $"{p:f6}";
         }
 
         public static int[] PageSize(int size) => new[] { size };

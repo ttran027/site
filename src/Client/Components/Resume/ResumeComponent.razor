@@ -1,0 +1,62 @@
+﻿@if (Resume is null)
+{
+     <p>Resume is not correctly loaded</p>
+}
+else
+{
+    <MudCard Class="pa-5 mb-4">
+            <h1 class="d-flex flex-row align-center"><MudIcon Icon="@Icons.Outlined.Summarize" Class="mr-1"/>Summary</h1>
+            <p>@Resume.Summary</p>
+        </MudCard>
+
+        <MudCard Class="pa-5 mb-4">
+            <h1 class="d-flex flex-row align-center"><MudIcon Icon="@Icons.Outlined.WorkOutline" Class="mr-1"/>Experience</h1>
+            <div class="d-flex flex-column">
+                @foreach (var exp in Resume.Experiences)
+                {
+                    <div class="d-flex justify-space-between">
+                        <div class="d-flex flex-column">
+                            <span>@exp?.Company, @exp?.Location.City, @exp?.Location.State</span>
+                            <span class="orange-text">@exp?.Position</span>
+                        </div>
+                        <div class="d-flex flex-column align-center">
+                            <span>@exp?.ToStartEndMonths()</span>
+                            <span>(@exp?.ToMonthsYearsLength())</span>
+                        </div>                   
+                    </div>
+                    <div class="d-flex flex-column">
+                        @foreach (var res in exp?.Responsibitites)
+                        {
+                            <span class="ml-4">- @res</span>
+                        }
+                    </div>
+                }
+            </div>    
+        </MudCard>
+
+        <MudCard Class="pa-5">
+            <h1 class="d-flex flex-row align-center"><MudIcon Icon="@Icons.Outlined.School" Class="mr-1"/>Education</h1>
+            <div class="d-flex flex-column">
+                @foreach (var edu in Resume.Educations)
+                {
+                    <div class="d-flex justify-space-between">
+                        <div class="d-flex flex-column"> 
+                            <span>@edu?.Institution, @edu?.Location.City, @edu?.Location.State</span>
+                            <span class="orange-text ml-4">@edu?.Degree</span>
+                            <span class="ml-4">GPA: @edu?.Grade</span>
+                        </div>
+                        <div>
+                            @edu?.GraduationDate.ToString("MMMM yyyy")
+                        </div>
+                    </div>
+                }
+            </div>  
+        </MudCard>    
+}
+
+
+@code {
+    [Parameter]
+    [EditorRequired]
+    public ResumeDetails? Resume { get; set; }
+}

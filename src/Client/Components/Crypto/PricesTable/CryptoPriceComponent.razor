@@ -1,0 +1,17 @@
+﻿<div class="d-flex flex-column align-end" style="width: 100px;">
+    @if(_loading)
+    {
+        <MudProgressCircular Size="Size.Small" Color="Color.Default" Indeterminate="true" />
+    }
+    else
+    {
+        @if (Price.Price is null)
+        {
+            <span>Unavailable</span>
+        }else
+        {
+            <span>@($"{Price.Price?.ToPrice()} {Price.Base}")</span>
+            @GetPercent(Price.PercentChange24Hour);
+        }     
+    }      
+</div>            
