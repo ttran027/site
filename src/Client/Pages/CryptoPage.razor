@@ -4,11 +4,11 @@
 <MudContainer>
     <MudExpansionPanels MultiExpansion="true">
         <MudExpansionPanel Style="@PanelStyle" 
-                           TitleContent="@GetTitle("Gain Calculator", "https://github.com/ttran027/site/tree/master/src/Website.Personal.Client/Crypto/GainCalculator")">     
+                           TitleContent="@GetTitle("Gain Calculator", "https://github.com/ttran027/site/tree/master/src/Client/Components/Crypto/GainCalculator")">     
             <GainCalculatorComponent/>
         </MudExpansionPanel>
         <MudExpansionPanel Style="@PanelStyle" 
-                           TitleContent="@GetTitle("Crypto List", "https://github.com/ttran027/site/tree/master/src/Website.Personal.Client/Crypto/List")">         
+                           TitleContent="@GetTitle("Prices Table", "https://github.com/ttran027/site/tree/master/src/Client/Components/Crypto/PricesTable")">         
             
                            <PricesTableComponent Assets="@SupportedCrypto"
                                                  GetPrice="GetPriceAsync"/>
