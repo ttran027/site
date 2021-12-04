@@ -1,16 +1,3 @@
-/* /Components/Crypto/List/CryptoPriceComponent.razor.rz.scp.css */
-.crypto-price[b-ghmbzufkqt] {
-    width: auto;
-    max-width: fit-content;
-}
-
-.crypto-price div:nth-child(1)[b-ghmbzufkqt] {
-    width: 245px;
-}
-
-.crypto-price div:nth-child(2)[b-ghmbzufkqt] {
-    width: 80px;
-}
 /* /Components/Layouts/MainLayout.razor.rz.scp.css */
 .page[b-5jal6u73za] {
     position: relative;
