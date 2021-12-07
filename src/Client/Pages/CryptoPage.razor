@@ -10,7 +10,7 @@
         <MudExpansionPanel Style="@PanelStyle" 
                            TitleContent="@GetTitle("Prices Table", "https://github.com/ttran027/site/tree/master/src/Client/Components/Crypto/PricesTable")">         
             
-                           <PricesTableComponent Assets="@SupportedCrypto"
+                           <PricesTableComponent Assets="@_assets"
                                                  GetPrice="GetPriceAsync"/>
         </MudExpansionPanel>
     </MudExpansionPanels>
