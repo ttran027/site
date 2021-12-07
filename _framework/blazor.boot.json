@@ -7,7 +7,7 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "Client.dll": "sha256-sKqjxZO8DwanRmsLTMnwUcoMZGbjn7GyzgGtsux5ewQ=",
+      "Client.dll": "sha256-CcpxUbUIs5QCzHrREwkTsVRLMlHp1mUEmmtGJOdGbG4=",
       "FluentResults.dll": "sha256-BMLd8c6xAxrXZrp0GlidCfr5thxd0XO7PBhoRrLzcI4=",
       "FluentValidation.dll": "sha256-CvoEqBeiOYE8ZZ8p4UGWLrZ+DxN32ckWTuaKiA7DjWg=",
       "MediatR.dll": "sha256-fQTLMGLCCX5kLC\/epoTUwFSME++hDMWmDcXy2s+i968=",
