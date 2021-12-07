@@ -14,11 +14,16 @@
     </MudPaper>
 </div>
 @code {
-    private GainCalculatorInput Inputs = new();
-    private GainCalculatorOutput Outputs = new();
+    private GainCalculatorInput Inputs;
+    private GainCalculatorOutput Outputs;
 
     [Parameter]
     public string Class { get; set; } = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        Reset();
+    }
 
     private void Calculate()
     {
@@ -34,7 +39,10 @@
 
     private void Reset()
     {
-        Inputs = new();
+        Inputs = new()
+        {
+            Amount = 1000m
+        };
         Outputs = new();
     }
 }
