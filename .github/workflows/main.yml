@@ -21,6 +21,14 @@ jobs:
       # changes the base-tag in index.html from '/' to 'site' to match GitHub Pages repository subdirectory
     - name: Change base-tag in index.html from / to site
       run: sed -i 's/<base href="\/" \/>/<base href="\/site\/" \/>/g' release/wwwroot/index.html
+      
+      # base href url value should be changed so that resources like CSS and scripts can load properly. 
+    - name: Rewrite base href
+      if: success()
+      uses: SteveSandersonMS/ghaction-rewrite-base-href@v1
+      with:
+        html_path: release/wwwroot/index.html
+        base_href: site
 
     # add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project. (Allow files and folders starting with an underscore)
     - name: Add .nojekyll file
