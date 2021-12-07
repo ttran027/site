@@ -18,10 +18,6 @@ jobs:
     - name: Publish application
       run: dotnet publish src/Client/Client.csproj -c Release -o release --nologo
       
-      # changes the base-tag in index.html from '/' to 'site' to match GitHub Pages repository subdirectory
-    - name: Change base-tag in index.html from / to site
-      run: sed -i 's/<base href="\/" \/>/<base href="\/site\/" \/>/g' release/wwwroot/index.html
-      
       # base href url value should be changed so that resources like CSS and scripts can load properly. 
     - name: Rewrite base href
       if: success()
