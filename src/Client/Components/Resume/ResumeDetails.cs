@@ -7,7 +7,8 @@
         string Email,
         List<string> Skills,
         List<Education> Educations,
-        List<WorkExperience> Experiences
+        List<WorkExperience> Experiences,
+        Contact Contact
     );
 
     public record Education
@@ -32,5 +33,11 @@
     (
         string City,
         string State
+    );
+
+    public record Contact
+    (
+        string Email,
+        string Linkedin
     );
 }
