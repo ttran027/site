@@ -11,7 +11,7 @@ namespace Client.Pages
         private IMediator Mediator { get; set; } = null!;
 
 
-        private readonly string PanelStyle = "display: flex; flex-direction: column; align-items: center; width: 460px";
+        private readonly string PanelStyle = "display: flex; flex-direction: column; align-items: center; width: 445px";
 
         private readonly string Base = "USDT";
 

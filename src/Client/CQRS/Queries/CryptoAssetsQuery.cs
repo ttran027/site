@@ -19,12 +19,12 @@ namespace Client.CQRS.Queries
         {
             return await Result.Try(async () =>
             {
-                var response = await _httpClient.GetFromJsonAsync<IReadOnlyCollection<CryptoAsset>>("cryptos.json");
+                var response = await _httpClient.GetFromJsonAsync<List<CryptoAsset>>("cryptos.json");
                 if (response == null)
                 {
                     throw new Exception("Not Found");
                 }
-                return response;
+                return (IReadOnlyCollection<CryptoAsset>) response.OrderBy(e => e.Name).ToList();
             },
             ex => new Error("Failed to get crypto assets: " + ex.Message));
         }

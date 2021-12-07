@@ -1,4 +1,4 @@
-﻿<MudPaper Class="d-flex flex-column al pa-5 fit-content">
+﻿<MudPaper Class="d-flex flex-column al pa-4 fit-content">
     <MudTable Elevation="0" RowsPerPage="5" Items="@Assets" Hover="true" Breakpoint="Breakpoint.Sm" Filter="Search" Class="fit-content">
         <ToolBarContent>
             <MudTextField @bind-Value="_searchString" Immediate Clearable DebounceInterval="300" Placeholder="Search for crypto prices" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
@@ -6,7 +6,7 @@
         <RowTemplate>
             <MudTd>
                 <div class="d-flex flex-row">
-                    <div class="d-flex flex-column" style="width: 245px;">
+                    <div class="d-flex flex-column" style="width: 230px;">
                         <span>@context.Symbol</span>
                         @if (context.Name is not null)
                         {
