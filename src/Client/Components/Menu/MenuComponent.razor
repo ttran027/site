@@ -1,0 +1,30 @@
+﻿<MudCard Class="d-flex flex-column align-start" Style="@($"background-color: {AppColors.DarkGrey}")">
+    @if (Selected)
+    {
+        <div class="d-flex flex-column align-start">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Outlined.ArrowBackIosNew" Class="mb-2" OnClick="Reset">Back</MudButton>
+            @SelectedItem
+        </div>       
+    }
+    else
+    {      
+        @ChildContent      
+    } 
+</MudCard>
+@code {
+    [Parameter]
+    public bool Selected { get; set; }
+
+    [Parameter]
+    public RenderFragment? SelectedItem { get; set; } 
+
+    [Parameter]
+    [EditorRequired]
+    public RenderFragment? ChildContent{ get; set; }
+
+    private void Reset()
+    {
+        Selected = false;
+        SelectedItem = null;
+    }
+}

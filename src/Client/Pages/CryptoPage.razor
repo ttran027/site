@@ -1,17 +1,13 @@
 ﻿@page "/crypto"
 @using Client.Components.Crypto.PricesTable
 @using Client.Components.Crypto.GainCalculator
-<MudContainer>
-    <MudExpansionPanels MultiExpansion="true">
-        <MudExpansionPanel Style="@PanelStyle" 
-                           TitleContent="@GetTitle("Gain Calculator", "https://github.com/ttran027/site/tree/master/src/Client/Components/Crypto/GainCalculator")">     
-            <GainCalculatorComponent/>
-        </MudExpansionPanel>
-        <MudExpansionPanel Style="@PanelStyle" 
-                           TitleContent="@GetTitle("Prices Table", "https://github.com/ttran027/site/tree/master/src/Client/Components/Crypto/PricesTable")">         
-            
-                           <PricesTableComponent Assets="@_assets"
-                                                 GetPrice="GetPriceAsync"/>
-        </MudExpansionPanel>
-    </MudExpansionPanels>
-</MudContainer>
+@using Client.Components.Menu
+<MenuComponent Selected="@_menuItemSelected" SelectedItem="_selectedItem">
+    <MenuItemComponent Icon="@Icons.Outlined.Calculate" Title="Calculate Gain" OnItemClicked="OnItemSelected">
+        <GainCalculatorComponent/>
+    </MenuItemComponent>
+    <MenuItemComponent Icon="@Icons.Outlined.ShowChart" Title="Check Prices" OnItemClicked="OnItemSelected">
+        <PricesTableComponent Assets="@_assets"
+                              GetPrice="GetPriceAsync"/>
+    </MenuItemComponent>
+</MenuComponent>

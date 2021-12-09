@@ -5,6 +5,9 @@ namespace Client.Pages
 {
     public sealed partial class CryptoPage
     {
+        private bool _menuItemSelected;
+        private RenderFragment? _selectedItem;
+
         private List<CryptoInfo> _assets =  new List<CryptoInfo>();
 
         [Inject]
@@ -57,6 +60,12 @@ namespace Client.Pages
                 return new CryptoPrice(symbol, Base, double.Parse(result.Value.LastPrice), double.Parse(result.Value.PriceChangePercent));
             }
             return new CryptoPrice(symbol, Base, null, null);
+        }
+
+        private void OnItemSelected(RenderFragment content)
+        {
+            _menuItemSelected = true;
+            _selectedItem = content;
         }
     }
 }
