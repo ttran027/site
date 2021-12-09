@@ -26,6 +26,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Shared\Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="wwwroot\resume.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
