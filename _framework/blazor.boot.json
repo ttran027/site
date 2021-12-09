@@ -7,7 +7,7 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "Client.dll": "sha256-9D\/aTtT5540EqbFBINGnm1wxFKmWDkmf9fQfs\/SDZ6E=",
+      "Client.dll": "sha256-vQpzw8ExTt4qGQ5VOLOFHQLF1rmyX3Eb5fpWjbjT\/3I=",
       "FluentResults.dll": "sha256-BMLd8c6xAxrXZrp0GlidCfr5thxd0XO7PBhoRrLzcI4=",
       "FluentValidation.dll": "sha256-CvoEqBeiOYE8ZZ8p4UGWLrZ+DxN32ckWTuaKiA7DjWg=",
       "MediatR.dll": "sha256-fQTLMGLCCX5kLC\/epoTUwFSME++hDMWmDcXy2s+i968=",
@@ -30,6 +30,7 @@
       "Microsoft.JSInterop.WebAssembly.dll": "sha256-vnE\/f0iqOlVKaRjTpLiArMb+lw6INqH0HhqcMh9FPe0=",
       "MudBlazor.dll": "sha256-fmv25H\/sCZePzpkLolpnIqgUT3cA9R85tzuL1RWc3Jw=",
       "netstandard.dll": "sha256-p7cS\/rE4blMDOZU53PxKRgM5yCERVJp8ADTUskuRhu8=",
+      "Shared.dll": "sha256-pt2WpUEB5M3jIRpEoF0hA0XNRi+PuYbgvVNcoDazgaQ=",
       "System.Collections.Concurrent.dll": "sha256-Jzy0JL0iQPXVSzumhumR1+M8ZJ6LJbouSoRnjT7nuCY=",
       "System.Collections.dll": "sha256-FAUMEjaxJOxLr17zZ5PpO4CgoNQ1WEiROnqRs8gNBoU=",
       "System.ComponentModel.Annotations.dll": "sha256-vmtsWtnzAczh3ZJKYKU1wmSjFeXcm1ffvATZPSZkhN4=",
