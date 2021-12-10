@@ -1,0 +1,13 @@
+﻿<PageTitle>
+    @if (Title is not null)
+   {
+       @($"{Title} - ")
+   }
+   @_appName
+</PageTitle>
+@code {
+    private const string _appName = "HeimaTT";
+
+    [Parameter]
+    public string? Title { get; set; }
+}

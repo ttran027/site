@@ -3,7 +3,7 @@
 @using Client.CQRS.Queries
 @using Client.Components.Resume
 
-<PageTitle>Profile Page</PageTitle>
+<PageTitleComponent Title="About Me"/>
 @if (!_loading)
 {
     <ResumeComponent Resume="@Resume"/>
