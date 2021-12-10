@@ -17,7 +17,7 @@
       "url": "icon-180.png"
     },
     {
-      "hash": "sha256-+CG4TDswIWjTWgeXEGtTAu+jcm+bVNBKYCrZ7luNB6Y=",
+      "hash": "sha256-N5xkw79QGwknZQUDQCeMTSOwYk+Jm8h76fEsnPMqaKs=",
       "url": "index.html"
     },
     {
@@ -25,7 +25,7 @@
       "url": "manifest.json"
     },
     {
-      "hash": "sha256-o2ocahGZtNOIFxDs8UmCso0Z2Nq2gD5I\/dk1P1cHAxo=",
+      "hash": "sha256-VJ4N+iKoW98UUIOCt3HMR2+3cPqqEUBdHj18tmQmRBY=",
       "url": "resume.json"
     },
     {
@@ -61,11 +61,11 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-gYq7urlEttmr5de\/20oIaqAljND2T+jPafFFxK5nV84=",
+      "hash": "sha256-9O6XgvU9u2quXD6+OvOYdwMs4KiYhhuknlfqt1jBrxE=",
       "url": "_framework\/blazor.boot.json"
     },
     {
-      "hash": "sha256-\/WD2t5tCXF46EIBKy0tIKTtWcEl5\/59qwfAnFnCG5xQ=",
+      "hash": "sha256-FPasLQnvOqbYZTz+iHbmirGqofGFrKFCxuFylhQhR2U=",
       "url": "_framework\/Client.dll"
     },
     {
@@ -285,5 +285,5 @@
       "url": "_content\/MudBlazor\/MudBlazor.min.js"
     }
   ],
-  "version": "mjqLuBee"
+  "version": "xLVpk7NN"
 };
