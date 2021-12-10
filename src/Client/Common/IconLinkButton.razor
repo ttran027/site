@@ -1,0 +1,43 @@
+﻿<MudButton Class="@Class" Style="@Style" Size="@Size" Color="@Color" OnClick="OnClick">
+    <div class="d-flex flex-column align-center">
+        <MudIcon Icon="@Icon" Size="@Size" Color="@Color"/>
+        @if (Name is not null)
+        {
+            <MudText Typo="Typo.caption">@Name</MudText>
+        }
+    </div>
+</MudButton>
+    
+
+@code{
+    [Parameter]
+    public string? Name { get; set; }
+
+    [Parameter]
+    public string? Class { get; set; }
+
+    [Parameter]
+    public string? Style { get; set; }
+
+    [Parameter]
+    [EditorRequired]
+    public string Icon { get; set; }
+
+    [Parameter]
+    [EditorRequired]
+    public string Href { get; set; }
+
+    [Parameter]
+    public Color Color { get; set; } = Color.Inherit;
+
+    [Parameter]
+    public Size Size { get; set; } = Size.Medium;
+
+    [Inject]
+    private NavigationManager NavigationManager { get; set; } = null!;
+
+    private void OnClick()
+    {
+        NavigationManager.NavigateTo(Href);
+    }
+}

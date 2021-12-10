@@ -5,7 +5,6 @@
     <MudAppBar>
         <MudContainer Class="fit-content">
             <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-            Thinh's Homepage
         </MudContainer>
         <MudSpacer/>
         <IconLink Icon="@Icons.Custom.Brands.GitHub"
@@ -21,6 +20,27 @@
             @Body
         </MudContainer>
     </MudMainContent>
+    <MudHidden Breakpoint="Breakpoint.Xs" Invert>
+        <MudAppBar Bottom>
+            <MudSpacer/>
+            <IconLinkButton Icon="@Icons.Filled.Home"
+                            Href="home"
+                            Name="Home"/>
+            <MudSpacer/>
+            <IconLinkButton Icon="@Icons.Filled.Calculate"
+                            Href="calculators"
+                            Name="Calculators"/>
+            <MudSpacer/>
+            <IconLinkButton Icon="@Icons.Filled.VideogameAsset"
+                            Href="games"
+                            Name="Games"/>
+            <MudSpacer/>
+            <IconLinkButton Icon="@Icons.Filled.QrCode2"
+                            Href="qrcode"
+                            Name="QR Code"/>
+            <MudSpacer/>
+        </MudAppBar>
+    </MudHidden> 
 </MudLayout>
 @code {
     bool _drawerOpen = true;
