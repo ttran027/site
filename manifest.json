@@ -1,7 +1,7 @@
 {
   "name": "MyBlazorPwa",
   "short_name": "MyBlazorPwa",
-  "start_url": "./",
+  "start_url": "/site/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#03173d",

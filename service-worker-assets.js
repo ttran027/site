@@ -25,7 +25,7 @@
       "url": "index.html"
     },
     {
-      "hash": "sha256-ktWtobcLU4q\/BwyQAXoR9AkVgXi4GLXx9JEePcYQumI=",
+      "hash": "sha256-6+gwUV9vFD7zx8KUmGlE3iYFTVbiD+LKvlI5ks5FFGE=",
       "url": "manifest.json"
     },
     {
@@ -289,5 +289,5 @@
       "url": "_content\/MudBlazor\/MudBlazor.min.js"
     }
   ],
-  "version": "DIAKFq1c"
+  "version": "WBg2GzvR"
 };
