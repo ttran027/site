@@ -11,6 +11,9 @@
 
 @code{
     [Parameter]
+    public bool IsHome { get; set; }
+
+    [Parameter]
     public string? Name { get; set; }
 
     [Parameter]
@@ -39,7 +42,7 @@
     protected override void OnInitialized()
     {
         NavigationManager.LocationChanged += (s, e) => SetButtonColor();
-        
+        SetButtonColor();
     }
 
     private void SetButtonColor()
@@ -58,6 +61,11 @@
     private bool IsActive()
     {
         var relativePath = NavigationManager.ToBaseRelativePath(NavigationManager.Uri).ToLower();
+        if (IsHome)
+        {
+            return relativePath == Href.ToLower() || relativePath == string.Empty;
+
+        }
         return relativePath == Href.ToLower();
     }
 

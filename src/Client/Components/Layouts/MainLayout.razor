@@ -13,7 +13,7 @@
     <MudDrawer @bind-Open="@_drawerOpen">
         <NavMenu/>
     </MudDrawer>
-    <MudMainContent>
+    <MudMainContent Style="padding-bottom: calc(var(--mud-appbar-height) - var(--mud-appbar-height)/8);">
         <MudContainer MaxWidth="MaxWidth.Medium" Class="pt-5">
             @Body
         </MudContainer>
@@ -23,7 +23,8 @@
             <MudSpacer/>
             <BottomNavButton Icon="@Icons.Filled.Home"
                             Href="home"
-                            Name="Home"/>
+                            Name="Home"
+                            IsHome/>
             <MudSpacer/>
             <BottomNavButton Icon="@Icons.Filled.Calculate"
                             Href="calculators"
