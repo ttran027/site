@@ -9,7 +9,7 @@
         <MudContainer Class="d-flex pa-3 flex-column">
             <MudNumericField Class="mb-2" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" @bind-Value="Inputs.Amount" Label="Amount" HideSpinButtons Immediate DebounceInterval="300" OnDebounceIntervalElapsed="Calculate"/>
             <MudText Typo="Typo.h6" Class="mb-2">@Outputs.GetFinal().ToString("C")</MudText>
-            @Outputs.Gain.ToPercent(Typo.body1)
+            @((Outputs.GainRate*100).ToPercent(Typo.body1))
         </MudContainer>
     </MudContainer>
     <PricesTableComponent Assets="@_assets"
