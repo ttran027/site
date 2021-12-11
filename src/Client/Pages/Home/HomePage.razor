@@ -8,34 +8,3 @@
     <MudText>Heima means "home" is Icelandic and TT is my initials.</MudText>
     <MudText>Have fun and happy coding!</MudText>
 </MudCard>
-
-<PricesTableComponent Assets="@_assets"
-                      GetPrice="GetPriceAsync"/>
-@code{
-     private List<CryptoInfo> _assets =  new List<CryptoInfo>();
-
-        [Inject]
-        private IMediator Mediator { get; set; } = null!;
-
-        private readonly string Base = "USDT";
-
-        protected async override Task OnInitializedAsync()
-        {
-            var result = await Mediator.Send(new CryptoAssetsQuery());
-            if (result.IsSuccess)
-            {
-                _assets = result.Value.Select(e => new CryptoInfo(e.Symbol, e.Name)).ToList();
-            }
-        }
-
-        private async Task<CryptoPrice> GetPriceAsync(string symbol)
-        {
-           
-            var result = await Mediator.Send(new CryptoPriceQuery() { Symbol = symbol, Base=Base });
-            if (result.IsSuccess)
-            {
-                return new CryptoPrice(symbol, Base, double.Parse(result.Value.LastPrice), double.Parse(result.Value.PriceChangePercent));
-            }
-            return new CryptoPrice(symbol, Base, null, null);
-        }
-}

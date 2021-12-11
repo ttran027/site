@@ -1,27 +1,41 @@
-﻿<MudPaper Class="d-flex flex-column al pa-4 fit-content">
-    <MudTable Elevation="0" RowsPerPage="5" Items="@Assets" Hover="true" Breakpoint="Breakpoint.Sm" Filter="Search" Class="fit-content">
-        <ToolBarContent>
-            <MudTextField @bind-Value="_searchString" Immediate Clearable DebounceInterval="300" Placeholder="Search for crypto prices" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
-        </ToolBarContent>
-        <RowTemplate>
-            <MudTd>
-                <div class="d-flex flex-row">
-                    <div class="d-flex flex-column" style="width: 230px;">
-                        <span>@context.Symbol</span>
-                        @if (context.Name is not null)
-                        {
-                            <MudText Color="Color.Secondary">@context.Name</MudText>
-                        }                    
-                   </div>
-                   <CryptoPriceComponent Symbol="@context.Symbol" GetPrice="GetPrice"/>
-                </div>        
-            </MudTd>
-        </RowTemplate>
-        <PagerContent>
-            <MudTablePager HideRowsPerPage/>
-        </PagerContent>
-    </MudTable>
-</MudPaper>
+﻿
+<MudTable Elevation="0"
+          RowsPerPage="5"           Items="@Assets" 
+          Hover="true" 
+          Style="background-color: inherit; max-width: 390px !important; width: auto !important; min-width: 350px !important;" 
+          Breakpoint="Breakpoint.Sm" 
+          Filter="Search" 
+          Class="fit-content">
+    <ToolBarContent>
+            <MudTextField @bind-Value="_searchString" 
+                      Immediate 
+                      Clearable 
+                      DebounceInterval="300" 
+                      Placeholder="Search for crypto prices" 
+                      Adornment="Adornment.Start" 
+                      AdornmentIcon="@Icons.Material.Filled.Search" 
+                      Variant="Variant.Outlined"
+                      IconSize="Size.Medium" 
+                      Class="mb-5"></MudTextField>      
+    </ToolBarContent>
+    <RowTemplate>
+        <MudTd Class="d-flex flex-row px-0">
+            <MudContainer Class="d-flex flex-column pa-0">
+                <MudText>@context.Symbol</MudText>                       
+                @if (context.Name is not null)
+                {
+                    <MudText Style="min-width: max-content;" Color="Color.Secondary">@context.Name</MudText>
+                }                    
+            </MudContainer>
+            <MudSpacer/>
+            <CryptoPriceComponent Symbol="@context.Symbol" GetPrice="GetPrice"/>                          
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager HideRowsPerPage/>
+    </PagerContent>
+</MudTable>
+
 
 @code {
     private string _searchString = string.Empty;

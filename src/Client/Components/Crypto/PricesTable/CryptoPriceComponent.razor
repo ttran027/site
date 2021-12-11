@@ -1,4 +1,4 @@
-﻿<div class="d-flex flex-column align-end" style="width: 105px;">
+﻿<MudContainer Class="d-flex flex-column align-end">
     @if(_loading)
     {
         <MudProgressCircular Size="Size.Small" Color="Color.Default" Indeterminate="true" />
@@ -7,11 +7,11 @@
     {
         @if (Price.Price is null)
         {
-            <span>Unavailable</span>
+            <MudText>Unavailable</MudText>
         }else
         {
-            <span>@($"{Price.Price?.ToPrice()} {Price.Base}")</span>
-            @GetPercent(Price.PercentChange24Hour);
+            <MudText Style="min-width: max-content;">@($"{Price.Price?.ToPrice()} {Price.Base}")</MudText>
+            <MudText>@GetPercent(Price.PercentChange24Hour)</MudText>
         }     
     }      
-</div>            
+</MudContainer>            
