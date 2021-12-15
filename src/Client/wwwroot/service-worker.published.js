@@ -46,3 +46,5 @@ async function onFetch(event) {
 
     return cachedResponse || fetch(event.request);
 }
+
+const CACHE_VERSION = 1.0;
