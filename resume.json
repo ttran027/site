@@ -33,20 +33,24 @@
   ],
   "experiences": [
     {
-      "company": "CDYNE Corporation",
+      "company": "CDYNE Services",
+      "location": {
+        "city": "Chesapeake",
+        "state": "VA"
+      },
+      "position": "Software Developer",
+      "startDate": "2021-12-16T00:00:00",
+      "endDate": null
+    },
+    {
+      "company": "CDYNE Services",
       "location": {
         "city": "Chesapeake",
         "state": "VA"
       },
       "position": "Software Development Intern",
       "startDate": "2021-01-20T00:00:00",
-      "endDate": null,
-      "responsibitites": [
-        "Creates web pages and API endpoints as directed by team lead and software documentation",
-        "Creates SQL procedures and views as needed for application development",
-        "Attends daily development meetings to review development plans",
-        "Writes and refactors C# codes"
-      ]
+      "endDate": "2021-12-16T00:00:00"
     }
   ],
   "contact": {
