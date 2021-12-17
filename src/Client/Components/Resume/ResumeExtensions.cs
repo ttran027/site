@@ -14,8 +14,8 @@
             var years = referenceDate.Year - 1;
             var months = referenceDate.Month - 1;
             var result = string.Empty;
-            result += years > 0 ? $"{years} years " : "";
-            result += months > 0 ? $"{months} months" : "";
+            result += years > 0 ? $"({years} years )" : "";
+            result += months > 0 ? $"({months} months)" : "";
             return result;
         }
     }

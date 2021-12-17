@@ -14,21 +14,15 @@ else
             <div class="d-flex flex-column">
                 @foreach (var exp in Resume.Experiences)
                 {
-                    <div class="d-flex justify-space-between">
+                    <div class="d-flex justify-space-between mb-2">
                         <div class="d-flex flex-column">
                             <span>@exp?.Company, @exp?.Location.City, @exp?.Location.State</span>
                             <span class="orange-text">@exp?.Position</span>
                         </div>
-                        <div class="d-flex flex-column align-center">
+                        <div class="d-flex flex-column align-end">
                             <span>@exp?.ToStartEndMonths()</span>
-                            <span>(@exp?.ToMonthsYearsLength())</span>
+                            <span>@exp?.ToMonthsYearsLength()</span>
                         </div>                   
-                    </div>
-                    <div class="d-flex flex-column">
-                        @foreach (var res in exp?.Responsibitites)
-                        {
-                            <span class="ml-4">- @res</span>
-                        }
                     </div>
                 }
             </div>    

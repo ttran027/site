@@ -25,8 +25,7 @@
         Location Location,
         string Position,
         DateTime StartDate,
-        DateTime? EndDate,
-        string[] Responsibitites
+        DateTime? EndDate
     );
 
     public record Location
