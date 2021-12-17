@@ -1,6 +1,8 @@
-﻿
+﻿@inherits FluxorComponent
+
 <MudTable Elevation="0"
-          RowsPerPage="5"           Items="@Assets" 
+          RowsPerPage="5" 
+          Items="@Assets" 
           Hover="true" 
           Style="background-color: inherit; max-width: 390px !important; width: auto !important; min-width: 350px !important;" 
           Breakpoint="Breakpoint.Sm" 
@@ -16,7 +18,8 @@
                       AdornmentIcon="@Icons.Material.Filled.Search" 
                       Variant="Variant.Outlined"
                       IconSize="Size.Medium" 
-                      Class="mb-5"></MudTextField>      
+                      Class="mb-5"
+                      OnDebounceIntervalElapsed="UpdateSearchState"></MudTextField>      
     </ToolBarContent>
     <RowTemplate>
         <MudTd Class="d-flex flex-row px-0">
@@ -35,33 +38,3 @@
         <MudTablePager HideRowsPerPage/>
     </PagerContent>
 </MudTable>
-
-
-@code {
-    private string _searchString = string.Empty;
-    private bool _loading;
-
-    /// <summary>
-    /// A function that takes in symbol name as <see cref="string"/> and returns <seealso cref="CryptoPrice"/>.
-    /// This function must be passed to display the price.
-    /// </summary>
-    [Parameter]
-    [EditorRequired]
-    public Func<string, Task<CryptoPrice>> GetPrice { get; set; }
-
-    /// <summary>
-    /// A list of crypto assets to be supported int this table
-    /// </summary>
-    [Parameter]
-    public ICollection<CryptoInfo> Assets { get; set; }
-
-    private bool Search(CryptoInfo info)
-    {
-        if (!string.IsNullOrEmpty(_searchString))
-        {
-            return info.Name.Contains(_searchString, StringComparison.OrdinalIgnoreCase) ||
-                    info.Symbol.Contains(_searchString, StringComparison.OrdinalIgnoreCase);
-        }
-        return true;
-    }
-}
