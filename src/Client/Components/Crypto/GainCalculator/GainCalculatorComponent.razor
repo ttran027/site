@@ -17,7 +17,7 @@
 </MudContainer>
 
 @code {
-    private GainCalculatorInput Inputs = new() { Amount = 1000 };
+    private GainCalculatorInput Inputs = new();
     private GainCalculatorOutput Outputs = new();
 
     [Parameter]
@@ -28,15 +28,34 @@
     [Inject]
     private IMediator Mediator { get; set; } = null!;
 
+    [Inject]
+    private IState<GainCalculatorState> State {  get;  set; } = null!;
+
+    [Inject]
+    private IDispatcher Dispatcher { get; set; } = null!;
+
     private readonly string Base = "USDT";
+
+    protected override void OnInitialized()
+    {
+        Inputs = State.Value.Input;
+        Outputs = State.Value.Output;
+        base.OnInitialized();
+    }
 
     protected async override Task OnInitializedAsync()
     {
+
         var result = await Mediator.Send(new CryptoAssetsQuery());
         if (result.IsSuccess)
         {
             _assets = result.Value.Select(e => new CryptoInfo(e.Symbol, e.Name)).ToList();
         }
+    }
+
+    private void UpdateGainCalulatorState()
+    {
+        Dispatcher.Dispatch(new GainCalculatorInputsEnterAction() { Input = Inputs, Output = Outputs });
     }
 
     private async Task<CryptoPrice> GetPriceAsync(string symbol)
@@ -61,5 +80,6 @@
             Outputs.GainRate = gainRate;
             Outputs.Gain = gainRate * Inputs.Amount;
         }
+        UpdateGainCalulatorState();
     }
 }
