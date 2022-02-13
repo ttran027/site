@@ -6,3 +6,4 @@ global using MudBlazor;
 global using FluentValidation;
 global using Fluxor;
 global using Fluxor.Blazor.Web.Components;
+global using Client.Constants;
