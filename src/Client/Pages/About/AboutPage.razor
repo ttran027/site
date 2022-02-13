@@ -1,11 +1,10 @@
 ﻿@page "/about"
-@using Client.CQRS.Queries
 @using Client.Components.Resume
 
 <PageTitleComponent Title="About Me"/>
 @if (!_loading)
 {
-    <ResumeComponent Resume="@Resume"/>
+    <ResumeComponent Resume="@Details"/>
 }
 else
 {
@@ -14,7 +13,7 @@ else
 
 
 @code {
-    private ResumeDetails? Resume;
+    private ResumeDetails? Details;
     private bool _loading;
 
     [Inject]
@@ -23,17 +22,20 @@ else
     [Inject]
     private ISnackbar Snackbar { get; set; } = null!;
 
+    [Inject]
+    private ApplicationSettings ApplicationSettings { get; set; } = null!;
+
     protected override async Task OnInitializedAsync()
     {
         _loading = true;
-        var result = await Mediator.Send(new ResumeQuery());
+        var result = await Resume.GetAsync(ApplicationSettings.ResumeUrl);
         if (result.IsSuccess)
         {
-            Resume = result.Value;
+            Details = result.Value;
         }
         else
         {
-            Resume = null;
+            Details = null;
             Snackbar.Add(string.Concat(result.Errors));
         }
         _loading = false;
