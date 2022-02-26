@@ -28,5 +28,5 @@ builder.Services.AddSingleton<ApplicationSettings>(new ApplicationSettings()
     ResumeUrl = builder.HostEnvironment.BaseAddress + "resume.json",
 });
 
-builder.Services.AddMudServices();
+builder.Services.AddBlazorUILibrary();
 await builder.Build().RunAsync();

@@ -7,3 +7,5 @@ global using FluentValidation;
 global using Fluxor;
 global using Fluxor.Blazor.Web.Components;
 global using Client.Constants;
+global using Blazor.UI.Library;
+global using Blazor.UI.Library.Models;
