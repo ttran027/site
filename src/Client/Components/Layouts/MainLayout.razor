@@ -11,37 +11,34 @@
                   NewTab/>
     </MudAppBar>
     <MudDrawer @bind-Open="@_drawerOpen">
-        <NavMenu/>
+        <NavMenuBar Items="@_sideNavItems"/>
     </MudDrawer>
     <MudMainContent Style="padding-bottom: calc(var(--mud-appbar-height) - var(--mud-appbar-height)/8);">
         <MudContainer MaxWidth="MaxWidth.Medium">
             @Body
         </MudContainer>
     </MudMainContent>
-    <MudHidden Breakpoint="Breakpoint.Xs" Invert>
-        <MudAppBar Bottom>
-            <MudSpacer/>
-            <BottomNavButton Icon="@Icons.Filled.Home"
-                            Href="home"
-                            Name="Home"
-                            IsHome/>
-            <MudSpacer/>
-            <BottomNavButton Icon="@Icons.Filled.Calculate"
-                            Href="calculators"
-                            Name="Calculators"/>
-            <MudSpacer/>
-            <BottomNavButton Icon="@Icons.Filled.VideogameAsset"
-                            Href="games"
-                            Name="Games"/>
-            <MudSpacer/>
-            <BottomNavButton Icon="@Icons.Filled.QrCode2"
-                            Href="qrcode"
-                            Name="QR Code"/>
-            <MudSpacer/>
-        </MudAppBar>
-    </MudHidden> 
+    <NavMenuBar Items="@_bottomNavItems" Bottom/>
 </MudLayout>
+
 @code {
+    private ICollection<NavMenuItem> _bottomNavItems = new List<NavMenuItem>()
+    {
+        new("Home", "home", Icons.Filled.Home, IsHome: true),
+        new("Calculators", "calculators", Icons.Filled.Calculate, IsHome: false),
+        new("Games", "games", Icons.Filled.VideogameAsset, IsHome: false),
+        new("QR Code", "qrcode", Icons.Filled.QrCode2, IsHome: false),
+    };
+
+    private ICollection<NavMenuItem> _sideNavItems = new List<NavMenuItem>()
+    {
+        new("Home", "home", Icons.Filled.Home, IsHome: false),
+        new("Calculators", "calculators", Icons.Filled.Calculate, IsHome: false),
+        new("Games", "games", Icons.Filled.VideogameAsset, IsHome: false),
+        new("QR Code", "qrcode", Icons.Filled.QrCode2, IsHome: false),
+        new("About Me", "about", Icons.Filled.ContactPage, IsHome: false),
+    };
+
     bool _drawerOpen = true;
 
     void DrawerToggle()
