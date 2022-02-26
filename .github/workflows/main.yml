@@ -16,7 +16,7 @@ jobs:
           include-prerelease: true
     
     - name: Authenticate Github Nuget
-      run: dotnet nuget add source --username USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/ttran027/index.json"
+      run: dotnet nuget add source --username tdtran04@gamil.com --password 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 --store-password-in-clear-text --name github "https://nuget.pkg.github.com/ttran027/index.json"
 
     - name: Publish application
       run: dotnet publish src/Client/Client.csproj -c Release -o release --nologo
