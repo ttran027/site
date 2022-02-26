@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Balzor.UI.Library" Version="1.0.1" />
+    <PackageReference Include="Blazor.UI.Library" Version="1.0.2" />
     <PackageReference Include="FluentValidation" Version="10.3.4" />
     <PackageReference Include="Fluxor" Version="4.2.1" />
     <PackageReference Include="Fluxor.Blazor.Web" Version="4.2.1" />
