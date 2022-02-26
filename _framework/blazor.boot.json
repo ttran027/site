@@ -7,9 +7,9 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "Blazor.UI.Library.dll": "sha256-6tcx3W3Zhi2cOSXGnVLic8rCw4V\/aqyPwoXAaxM6YoM=",
+      "Blazor.UI.Library.dll": "sha256-KNI7B9Boxrguc9d0\/p+6G2OtdoqL0oA+clq3rC\/laSw=",
       "Business.Queries.dll": "sha256-ocjQwAnjClKWAfMmo93Pdh3DQt7mvTO44RxJjzxaZfI=",
-      "Client.dll": "sha256-QfRvoyt68Ndi\/HPT4Pc6s20pESm8Z\/5dJyEi2O0OOgI=",
+      "Client.dll": "sha256-5CC61QK7zoY03VFAqhXsTcEo6Vnw94pQ98qb1swgxo8=",
       "FluentResults.dll": "sha256-tvW7rjq2LLKyFEP1CbZPKZ0ndLaaVFOSNr2pN66Ycqw=",
       "FluentValidation.dll": "sha256-CvoEqBeiOYE8ZZ8p4UGWLrZ+DxN32ckWTuaKiA7DjWg=",
       "Fluxor.Blazor.Web.dll": "sha256-uOWZVoE\/lygnpLSSKG\/KfkeKVGZt86RgNcQNYZZQcJY=",
