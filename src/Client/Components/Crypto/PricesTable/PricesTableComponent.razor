@@ -8,9 +8,10 @@
           Breakpoint="Breakpoint.Sm"
           Class="fit-content"
           @ref="@_table"
-          CurrentPage="@TableState.Value.PageNumber">
+          CurrentPage="@TableState.Value.PageNumber"
+          Loading="@TableState.Value.Loading">
     <ToolBarContent>
-            <MudTextField @bind-Value="@_searchString"
+            <MudTextField @bind-Value="@SearchString"
                       Immediate 
                       Clearable 
                       DebounceInterval="300" 
@@ -26,13 +27,13 @@
         <MudTd Class="d-flex flex-row px-0">
             <MudContainer Class="d-flex flex-column pa-0">
                 <MudText>@context.Symbol</MudText>                       
-                @if (context.Name is not null)
+                @if (context.Symbol is not null)
                 {
-                    <MudText Style="min-width: max-content;" Color="Color.Secondary">@context.Name</MudText>
+                    <MudText Style="min-width: max-content;" Color="Color.Secondary">@context.Symbol</MudText>
                 }                    
             </MudContainer>
             <MudSpacer/>
-            <CryptoPriceComponent Symbol="@context.Symbol" GetPrice="GetPrice"/>                          
+            <CryptoPriceComponent Price="@context"/>                          
         </MudTd>
     </RowTemplate>
     <PagerContent>

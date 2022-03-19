@@ -2,23 +2,9 @@
 {
     public partial class CryptoPriceComponent
     {
-        private bool _loading;
-        private CryptoPrice Price;
-
         [Parameter]
         [EditorRequired]
-        public string Symbol { get; set; }
-
-        [Parameter]
-        [EditorRequired]
-        public Func<string, Task<CryptoPrice>> GetPrice { get; set; }
-
-        protected async override Task OnInitializedAsync()
-        {
-            _loading = true;
-            Price = await GetPrice(Symbol);
-            _loading = false;
-        }
+        public CryptoPrice Price { get; set; } = null!;
 
         private RenderFragment GetPercent(double? p) => builder =>
         {

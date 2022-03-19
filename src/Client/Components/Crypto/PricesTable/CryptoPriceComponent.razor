@@ -1,17 +1,10 @@
-﻿<MudContainer Class="d-flex flex-column align-end">
-    @if(_loading)
+﻿<MudContainer Class="d-flex flex-column align-end">   
+    @if (Price.Price is null)
     {
-        <MudProgressCircular Size="Size.Small" Color="Color.Default" Indeterminate="true" />
-    }
-    else
+        <MudText>Unavailable</MudText>
+    }else
     {
-        @if (Price.Price is null)
-        {
-            <MudText>Unavailable</MudText>
-        }else
-        {
-            <MudText Style="min-width: max-content;">@($"{Price.Price?.ToPrice()} {Price.Base}")</MudText>
-            <MudText>@GetPercent(Price.PercentChange24Hour)</MudText>
-        }     
-    }      
+        <MudText Style="min-width: max-content;">@($"{Price.Price?.ToPrice()} {Price.Base}")</MudText>
+        <MudText>@GetPercent(Price.PercentChange24Hour)</MudText>
+        }            
 </MudContainer>            
