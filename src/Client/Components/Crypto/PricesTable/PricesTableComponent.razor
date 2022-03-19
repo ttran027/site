@@ -1,15 +1,16 @@
 ﻿@inherits FluxorComponent
 
-<MudTable Elevation="0"
+<MudTable ServerData="GetItemsAsync"
+          Elevation="0"
           RowsPerPage="5" 
-          Items="@Assets" 
           Hover="true" 
           Style="background-color: inherit; max-width: 390px !important; width: auto !important; min-width: 350px !important;" 
-          Breakpoint="Breakpoint.Sm" 
-          Filter="Search" 
-          Class="fit-content">
+          Breakpoint="Breakpoint.Sm"
+          Class="fit-content"
+          @ref="@_table"
+          CurrentPage="@TableState.Value.PageNumber">
     <ToolBarContent>
-            <MudTextField @bind-Value="_searchString" 
+            <MudTextField @bind-Value="@_searchString"
                       Immediate 
                       Clearable 
                       DebounceInterval="300" 
@@ -19,7 +20,7 @@
                       Variant="Variant.Outlined"
                       IconSize="Size.Medium" 
                       Class="mb-5"
-                      OnDebounceIntervalElapsed="UpdateSearchState"></MudTextField>      
+                      OnDebounceIntervalElapsed="OnSearch"></MudTextField>      
     </ToolBarContent>
     <RowTemplate>
         <MudTd Class="d-flex flex-row px-0">

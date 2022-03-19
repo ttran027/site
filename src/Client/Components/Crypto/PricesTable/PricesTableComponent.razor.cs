@@ -2,8 +2,8 @@
 {
     public partial class PricesTableComponent
     {
+        private MudTable<CryptoInfo> _table;
         private string _searchString = string.Empty;
-
         /// <summary>
         /// A function that takes in symbol name as <see cref="string"/> and returns <seealso cref="CryptoPrice"/>.
         /// This function must be passed to display the price.
@@ -19,28 +19,47 @@
         public ICollection<CryptoInfo> Assets { get; set; }
 
         [Inject]
-        private IState<SearchState> State { get; set; }
+        private IState<PriceTableState> TableState { get; set; } = null!;
 
         [Inject]
-        public IDispatcher Dispatcher { get; set; }
+        public IDispatcher Dispatcher { get; set; } = null!;
 
         protected override void OnInitialized()
         {
-            _searchString = State.Value.SearchTerm;
+            _searchString = TableState.Value.SearchTerm;
             base.OnInitialized();
         }
 
-        private void UpdateSearchState()
+        private Task<TableData<CryptoInfo>> GetItemsAsync(TableState state)
         {
-            Dispatcher.Dispatch(new SearchEnterAction { Term = _searchString });
+            if (state.Page != TableState.Value.PageNumber)
+            {
+                Dispatcher.Dispatch(new PriceTableActions.ChangePageNumber(state.Page));
+            }
+
+            var items = Assets.Where(IsMatched).ToList();
+            var filterItems = items.Skip(state.PageSize * state.Page).Take(state.PageSize);
+
+            var data = new TableData<CryptoInfo>
+            {
+                Items = filterItems,
+                TotalItems = items.Count,
+            };
+            return Task.FromResult(data);
         }
 
-        private bool Search(CryptoInfo info)
+        private void OnSearch(string searchString)
+        {
+            Dispatcher.Dispatch(new PriceTableActions.SearchTickers(searchString));
+            _table.ReloadServerData();
+        }
+
+        private bool IsMatched(CryptoInfo info)
         {           
-            if (!string.IsNullOrEmpty(_searchString))
+            if (!string.IsNullOrEmpty(TableState.Value.SearchTerm))
             {
-                return info.Name.Contains(_searchString, StringComparison.OrdinalIgnoreCase) ||
-                        info.Symbol.Contains(_searchString, StringComparison.OrdinalIgnoreCase);
+                return info.Name.Contains(TableState.Value.SearchTerm, StringComparison.OrdinalIgnoreCase) ||
+                        info.Symbol.Contains(TableState.Value.SearchTerm, StringComparison.OrdinalIgnoreCase);
             }
             return true;
         }
