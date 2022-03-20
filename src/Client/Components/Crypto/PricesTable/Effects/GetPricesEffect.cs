@@ -43,8 +43,8 @@ public class GetPricesEffect : Effect<PriceTableActions.GetPrices>
         var result = await _mediator.Send(new CryptoPriceQuery(c.Symbol, Base));
         if (result.IsSuccess)
         {
-            return new CryptoPrice(c.Symbol, c.Name, Base, double.Parse(result.Value.LastPrice), double.Parse(result.Value.PriceChangePercent));
+            return new CryptoPrice(c.Symbol, c.Name, Base, double.Parse(result.Value.LastPrice), double.Parse(result.Value.PriceChangePercent), DateTime.Now);
         }
-        return new CryptoPrice(c.Symbol, c.Name, Base, null, null);
+        return new CryptoPrice(c.Symbol, c.Name, Base, null, null, DateTime.Now);
     }   
 }

@@ -2,7 +2,7 @@
 
 namespace Client.Components.Crypto.PricesTable
 {
-    public partial class PricesTableComponent
+    public partial class PricesTableComponent : IDisposable
     {
         private MudTable<CryptoPrice> _table;
         private string SearchString = string.Empty;
@@ -13,6 +13,9 @@ namespace Client.Components.Crypto.PricesTable
 
         [Inject]
         private IDispatcher Dispatcher { get; set; } = null!;
+
+        [Inject]
+        private IActionSubscriber ActionSubscriber { get; set; } = null!;
 
         [Inject]
         private ICryptoPriceCache Cache { get;set; } = null!;
@@ -32,6 +35,13 @@ namespace Client.Components.Crypto.PricesTable
             }
             _pageNumber = TableState.Value.PageNumber;
             SearchString = TableState.Value.SearchTerm;
+            await InvokeAsync(StateHasChanged);
+            ActionSubscriber.SubscribeToAction<PriceTableActions.GetPricesComplete>(this, _ => OnGetPricesAction());
+        }
+
+        private async Task OnGetPricesAction()
+        {
+            Items = (await Cache.GetPricesAsync()).ToList();
             await InvokeAsync(StateHasChanged);
         }
 
@@ -57,6 +67,12 @@ namespace Client.Components.Crypto.PricesTable
                 Dispatcher.Dispatch(new PriceTableActions.ChangePageNumber(_table.CurrentPage));
             }
             _pageNumber = _table.CurrentPage;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            ActionSubscriber.UnsubscribeFromAllActions(this);
+            base.Dispose(disposing);
         }
     }
 }
