@@ -64,7 +64,7 @@ public static class CryptoAssets
         new("XLM","Stellar Lumens"),
         new("STORJ","Storj"),
         new("SUSHI","Sushi"),
-        new("USDT","Tether"),
+        //new("USDT","Tether"),
         new("XTZ","Tezos"),
         new("GRT","The Graph"),
         new("UNI","Uniswap"),

@@ -3,9 +3,11 @@
     public record CryptoPrice
     (
         string Symbol,
+        string? Name,
         string Base,
         double? Price,
-        double? PercentChange24Hour
+        double? PercentChange24Hour,
+        DateTime LastUpdated
     );
 
     public record CryptoInfo

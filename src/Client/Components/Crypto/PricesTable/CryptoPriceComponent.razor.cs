@@ -1,23 +1,35 @@
 ﻿namespace Client.Components.Crypto.PricesTable
 {
-    public partial class CryptoPriceComponent
+    public partial class CryptoPriceComponent : IDisposable
     {
-        private bool _loading;
-        private CryptoPrice Price;
-
+        private Timer? _timer;
         [Parameter]
         [EditorRequired]
-        public string Symbol { get; set; }
+        public CryptoPrice Price { get; set; } = null!;
 
-        [Parameter]
-        [EditorRequired]
-        public Func<string, Task<CryptoPrice>> GetPrice { get; set; }
+        [Inject]
+        private IDispatcher Dispatcher { get; set; } = null!;
 
-        protected async override Task OnInitializedAsync()
+        public void Dispose()
         {
-            _loading = true;
-            Price = await GetPrice(Symbol);
-            _loading = false;
+            _timer?.Dispose();
+        }
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            if (!firstRender) return;
+
+            _timer = new Timer(UpdatePrice, null, 0, 10000);
+            
+            base.OnAfterRender(firstRender);
+        }
+
+        private void UpdatePrice(object? state)
+        {
+            if ((DateTime.Now - Price.LastUpdated).TotalSeconds > 10)
+            {
+                Dispatcher.Dispatch(new PriceTableActions.UpdatePrice(new CryptoInfo(Price.Symbol, Price.Name)));
+            }
         }
 
         private RenderFragment GetPercent(double? p) => builder =>

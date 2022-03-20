@@ -1,15 +1,18 @@
 ﻿@inherits FluxorComponent
 
-<MudTable Elevation="0"
+<MudTable Items="@Items"
+          Elevation="0"
           RowsPerPage="5" 
-          Items="@Assets" 
           Hover="true" 
           Style="background-color: inherit; max-width: 390px !important; width: auto !important; min-width: 350px !important;" 
-          Breakpoint="Breakpoint.Sm" 
-          Filter="Search" 
-          Class="fit-content">
+          Breakpoint="Breakpoint.Sm"
+          Class="fit-content"
+          Filter="@Filter"
+          Loading="@TableState.Value.Loading"
+          CurrentPage="@_pageNumber"
+          @ref="@_table">
     <ToolBarContent>
-            <MudTextField @bind-Value="_searchString" 
+            <MudTextField @bind-Value="@SearchString"
                       Immediate 
                       Clearable 
                       DebounceInterval="300" 
@@ -19,22 +22,24 @@
                       Variant="Variant.Outlined"
                       IconSize="Size.Medium" 
                       Class="mb-5"
-                      OnDebounceIntervalElapsed="UpdateSearchState"></MudTextField>      
+                      OnDebounceIntervalElapsed="OnSearch"></MudTextField>      
     </ToolBarContent>
     <RowTemplate>
         <MudTd Class="d-flex flex-row px-0">
             <MudContainer Class="d-flex flex-column pa-0">
-                <MudText>@context.Symbol</MudText>                       
-                @if (context.Name is not null)
+                <MudText>@context.Name</MudText>                       
+                @if (context.Symbol is not null)
                 {
-                    <MudText Style="min-width: max-content;" Color="Color.Secondary">@context.Name</MudText>
+                    <MudText Style="min-width: max-content;" Color="Color.Secondary">@context.Symbol</MudText>
                 }                    
             </MudContainer>
             <MudSpacer/>
-            <CryptoPriceComponent Symbol="@context.Symbol" GetPrice="GetPrice"/>                          
+            <CryptoPriceComponent Price="@context"/>                          
         </MudTd>
     </RowTemplate>
-    <PagerContent>
-        <MudTablePager HideRowsPerPage/>
+    <PagerContent >
+        <div @onmouseleave="OnPagerClicked" @ontouchenter="OnPagerClicked">
+            <MudTablePager HideRowsPerPage/>
+        </div>       
     </PagerContent>
 </MudTable>

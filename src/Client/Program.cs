@@ -1,9 +1,10 @@
+using Blazored.LocalStorage;
 using Business.Queries;
 using Business.Queries.Crypto;
 using Client;
+using Client.Cache;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using MudBlazor.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -29,4 +30,6 @@ builder.Services.AddSingleton<ApplicationSettings>(new ApplicationSettings()
 });
 
 builder.Services.AddBlazorUILibrary();
+builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddTransient<ICryptoPriceCache, CryptoPriceCache>();
 await builder.Build().RunAsync();

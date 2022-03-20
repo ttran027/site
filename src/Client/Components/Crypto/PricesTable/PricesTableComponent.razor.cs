@@ -1,48 +1,88 @@
-﻿namespace Client.Components.Crypto.PricesTable
+﻿using Client.Cache;
+
+namespace Client.Components.Crypto.PricesTable
 {
-    public partial class PricesTableComponent
+    public partial class PricesTableComponent : IDisposable
     {
-        private string _searchString = string.Empty;
-
-        /// <summary>
-        /// A function that takes in symbol name as <see cref="string"/> and returns <seealso cref="CryptoPrice"/>.
-        /// This function must be passed to display the price.
-        /// </summary>
-        [Parameter]
-        [EditorRequired]
-        public Func<string, Task<CryptoPrice>> GetPrice { get; set; }
-
-        /// <summary>
-        /// A list of crypto assets to be supported int this table
-        /// </summary>
-        [Parameter]
-        public ICollection<CryptoInfo> Assets { get; set; }
+        private MudTable<CryptoPrice> _table;
+        private string SearchString = string.Empty;
+        private List<CryptoPrice> Items = new();
+        private int _pageNumber = 0;
+        [Inject]
+        private IState<PriceTableState> TableState { get; set; } = null!;
 
         [Inject]
-        private IState<SearchState> State { get; set; }
+        private IDispatcher Dispatcher { get; set; } = null!;
 
         [Inject]
-        public IDispatcher Dispatcher { get; set; }
+        private IActionSubscriber ActionSubscriber { get; set; } = null!;
 
-        protected override void OnInitialized()
+        [Inject]
+        private ICryptoPriceCache Cache { get;set; } = null!;
+
+        protected async override Task OnAfterRenderAsync(bool firstRender)
         {
-            _searchString = State.Value.SearchTerm;
-            base.OnInitialized();
-        }
+            await base.OnAfterRenderAsync(firstRender);
+            if (!firstRender) return;
 
-        private void UpdateSearchState()
-        {
-            Dispatcher.Dispatch(new SearchEnterAction { Term = _searchString });
-        }
-
-        private bool Search(CryptoInfo info)
-        {           
-            if (!string.IsNullOrEmpty(_searchString))
+            if (!(await Cache.IsCacheValid()))
             {
-                return info.Name.Contains(_searchString, StringComparison.OrdinalIgnoreCase) ||
-                        info.Symbol.Contains(_searchString, StringComparison.OrdinalIgnoreCase);
+                Dispatcher.Dispatch(new PriceTableActions.GetPrices());
+            }
+            else
+            {
+                Items = (await Cache.GetPricesAsync()).ToList();
+            }
+            _pageNumber = TableState.Value.PageNumber;
+            SearchString = TableState.Value.SearchTerm;
+            await InvokeAsync(StateHasChanged);
+            ActionSubscriber.SubscribeToAction<PriceTableActions.GetPricesComplete>(this, _ => OnGetPricesAction());
+            ActionSubscriber.SubscribeToAction<PriceTableActions.UpdatePriceComplete>(this, OnUpdatePriceAction);
+        }
+
+        private async void OnUpdatePriceAction(PriceTableActions.UpdatePriceComplete obj)
+        {
+            var index = Items.FindIndex(x => x.Symbol.Equals(obj.NewPrice.Symbol, StringComparison.OrdinalIgnoreCase));
+            Items[index] = obj.NewPrice;
+            _pageNumber = _table.CurrentPage;
+            await InvokeAsync(StateHasChanged);
+        }
+
+        private async Task OnGetPricesAction()
+        {
+            Items = (await Cache.GetPricesAsync()).ToList();
+            await InvokeAsync(StateHasChanged);
+        }
+
+        private void OnSearch(string searchString)
+        {
+            _pageNumber = 0;
+            Dispatcher.Dispatch(new PriceTableActions.SearchTickers(searchString));
+        }
+
+        private bool Filter(CryptoPrice info)
+        {
+            if (!string.IsNullOrEmpty(TableState.Value.SearchTerm))
+            {
+                return info.Name.Contains(TableState.Value.SearchTerm, StringComparison.OrdinalIgnoreCase) ||
+                        info.Symbol.Contains(TableState.Value.SearchTerm, StringComparison.OrdinalIgnoreCase);
             }
             return true;
+        }
+
+        private void OnPagerClicked()
+        {
+            if (_table.CurrentPage != TableState.Value.PageNumber )
+            {
+                Dispatcher.Dispatch(new PriceTableActions.ChangePageNumber(_table.CurrentPage));
+            }
+            _pageNumber = _table.CurrentPage;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            ActionSubscriber.UnsubscribeFromAllActions(this);
+            base.Dispose(disposing);
         }
     }
 }
