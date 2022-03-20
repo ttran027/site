@@ -61,7 +61,7 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-\/7qjycPD8gcGIH3IKBQ4sR7CzM2AhpD3CDm2AasMOmY=",
+      "hash": "sha256-NmRIo60XOTXu7ObLGNjVmfl0jZdUG+hZyZyj4xWt2V4=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -69,11 +69,15 @@
       "url": "_framework\/Blazor.UI.Library.dll"
     },
     {
+      "hash": "sha256-6RRoYeDP3d0xabXmcCMF66wXeJlXVPem28Trs8sQiis=",
+      "url": "_framework\/Blazored.LocalStorage.dll"
+    },
+    {
       "hash": "sha256-4nQl+d5LN7LKD8uheYSpsOF5z6CykB2cfsz85abA7kY=",
       "url": "_framework\/Business.Queries.dll"
     },
     {
-      "hash": "sha256-sJ3NRJpW\/KmLnBenR036J5IK+D20\/Wv+pXHVch0cMA4=",
+      "hash": "sha256-X8v6\/N250VOe4173cspQRBRw0jPzOwesMSD63lY3YiE=",
       "url": "_framework\/Client.dll"
     },
     {
@@ -133,7 +137,7 @@
       "url": "_framework\/Microsoft.Extensions.Configuration.Json.dll"
     },
     {
-      "hash": "sha256-7yrt7k6Tc8pzG47Xr+O2oVcW4SLa3IZBVYipoCqkrrg=",
+      "hash": "sha256-rAgScdmn\/tJIgHMODXyO0m0xDp3J\/VHdcVjQOIN26O0=",
       "url": "_framework\/Microsoft.Extensions.DependencyInjection.Abstractions.dll"
     },
     {
@@ -157,7 +161,7 @@
       "url": "_framework\/Microsoft.Extensions.Primitives.dll"
     },
     {
-      "hash": "sha256-glqm31x6\/l\/DgW+AWKalmvIU79ng7aybHMNEH1LHlsQ=",
+      "hash": "sha256-k6PaQ5wy9Dx+pFQ0IoRVXBMihHBhf+le4s\/hrWiEMa8=",
       "url": "_framework\/Microsoft.JSInterop.dll"
     },
     {
@@ -245,7 +249,7 @@
       "url": "_framework\/System.ObjectModel.dll"
     },
     {
-      "hash": "sha256-lgbDbMM9KcwnIWqEepVkqqJRqm4kAd3BDzJbubveJlI=",
+      "hash": "sha256-j9wJwcknvNPBJib+ONMOS1G\/u\/A7\/g\/fYuYcLOZQLLA=",
       "url": "_framework\/System.Private.CoreLib.dll"
     },
     {
@@ -261,7 +265,7 @@
       "url": "_framework\/System.Runtime.CompilerServices.Unsafe.dll"
     },
     {
-      "hash": "sha256-gEUfwxL70o7+jJ1YxSdoy65zsWMOSnjboCnU4riFVg4=",
+      "hash": "sha256-P8bRDITJEuFbS5AuUdpTBsryjO4amqP1yjFCB6pNc2M=",
       "url": "_framework\/System.Runtime.dll"
     },
     {
@@ -281,7 +285,7 @@
       "url": "_framework\/System.Text.Json.dll"
     },
     {
-      "hash": "sha256-dTs88E8kC2aLL3zGEYXd4BI5RhqN4FnvNOU3Xs\/347c=",
+      "hash": "sha256-tMRyorfNAnhVaEWoWjzBfzUuqVuPK2lo\/Za31d2Qg+E=",
       "url": "_framework\/System.Text.RegularExpressions.dll"
     },
     {
@@ -309,5 +313,5 @@
       "url": "_content\/MudBlazor\/MudBlazor.min.js"
     }
   ],
-  "version": "RM8Em4mD"
+  "version": "iiBofuX\/"
 };
