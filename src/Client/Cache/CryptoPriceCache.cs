@@ -5,10 +5,11 @@ namespace Client.Cache;
 
 public interface ICryptoPriceCache
 {
-    Task<bool> IsEmptyAsync();
+    Task<bool> IsCacheValid();
     Task SavePricesAsync(IReadOnlyCollection<CryptoPrice> items);
     Task<IReadOnlyCollection<CryptoPrice>> GetPricesAsync();
     Task UpdatePriceAsync(CryptoPrice item);
+    Task<IReadOnlyCollection<string>> GetKeysInCache();
 }
 
 public class CryptoPriceCache : ICryptoPriceCache
@@ -20,10 +21,10 @@ public class CryptoPriceCache : ICryptoPriceCache
         _localStorage = localStorage;
     }
 
-    public async Task<bool> IsEmptyAsync()
+    public async Task<bool> IsCacheValid()
     {
-        var keys = (await _localStorage.KeysAsync()).Where(IsCryptoPriceKey);
-        return !keys.Any();
+        var keys = await GetKeysInCache();
+        return keys.Count == CryptoAssets.Assets.Count;
     }
 
     public async Task SavePricesAsync(IReadOnlyCollection<CryptoPrice> items)
@@ -56,4 +57,9 @@ public class CryptoPriceCache : ICryptoPriceCache
 
     private bool IsCryptoPriceKey(string key)
         => key.Contains(Prefix, StringComparison.OrdinalIgnoreCase);
+
+    public async Task<IReadOnlyCollection<string>> GetKeysInCache()
+    {
+        return (await _localStorage.KeysAsync()).Where(IsCryptoPriceKey).ToList();
+    }
 }

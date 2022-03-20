@@ -25,7 +25,7 @@ namespace Client.Components.Crypto.PricesTable
             await base.OnAfterRenderAsync(firstRender);
             if (!firstRender) return;
 
-            if (await Cache.IsEmptyAsync())
+            if (!(await Cache.IsCacheValid()))
             {
                 Dispatcher.Dispatch(new PriceTableActions.GetPrices());
             }

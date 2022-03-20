@@ -27,11 +27,14 @@ public class GetPricesEffect : Effect<PriceTableActions.GetPrices>
     private async Task GetPricesFromRemote()
     {
         var items = new List<CryptoPrice>();
-
+        var keysInCache = await _cache.GetKeysInCache();
         foreach (var item in _assets)
         {
-            var p = await GetPriceAsync(item);
-            items.Add(p);
+            if (!keysInCache.Any(x => x.Contains(item.Symbol, StringComparison.OrdinalIgnoreCase)))
+            {
+                var p = await GetPriceAsync(item);
+                items.Add(p);
+            }          
         }
 
         await _cache.SavePricesAsync(items);
