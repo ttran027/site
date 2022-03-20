@@ -3,6 +3,7 @@
     public record CryptoPrice
     (
         string Symbol,
+        string? Name,
         string Base,
         double? Price,
         double? PercentChange24Hour

@@ -1,62 +1,62 @@
-﻿namespace Client.Components.Crypto.PricesTable
+﻿using Client.Cache;
+
+namespace Client.Components.Crypto.PricesTable
 {
     public partial class PricesTableComponent
     {
         private MudTable<CryptoPrice> _table;
-        private MudTablePager _pager;
         private string SearchString = string.Empty;
         private List<CryptoPrice> Items = new();
-        private int TotalItems = 0;
+        private int _pageNumber = 0;
         [Inject]
         private IState<PriceTableState> TableState { get; set; } = null!;
 
         [Inject]
-        public IDispatcher Dispatcher { get; set; } = null!;
+        private IDispatcher Dispatcher { get; set; } = null!;
 
-        protected override void OnAfterRender(bool firstRender)
+        [Inject]
+        private ICryptoPriceCache Cache { get;set; } = null!;
+
+        protected async override Task OnAfterRenderAsync(bool firstRender)
         {
-            if (!firstRender)
-            {
-                return;
-            }
+            await base.OnAfterRenderAsync(firstRender);
+            if (!firstRender) return;
 
-            SearchString = TableState.Value.SearchTerm;
-
-            TableState.StateChanged += TableStateChanged;
-            
-            if (TableState.Value.CanGetData())
+            if (await Cache.IsEmptyAsync())
             {
                 Dispatcher.Dispatch(new PriceTableActions.GetPrices());
             }
-            
-            base.OnAfterRender(firstRender);
-        }
-
-        private void TableStateChanged(object? sender, EventArgs e)
-        {
-            _table.ReloadServerData();
-            InvokeAsync(StateHasChanged);
-        }
-
-        private Task<TableData<CryptoPrice>> GetItemsAsync(TableState state)
-        {
-            if (state.Page != TableState.Value.PageNumber)
+            else
             {
-                Dispatcher.Dispatch(new PriceTableActions.ChangePageNumber(state.Page));
+                Items = (await Cache.GetPricesAsync()).ToList();
             }
-
-            var data = new TableData<CryptoPrice>
-            {
-                Items = TableState.Value.Items,
-                TotalItems = TableState.Value.Total
-            };
-
-            return Task.FromResult(data);
+            _pageNumber = TableState.Value.PageNumber;
+            SearchString = TableState.Value.SearchTerm;
+            await InvokeAsync(StateHasChanged);
         }
 
         private void OnSearch(string searchString)
         {
             Dispatcher.Dispatch(new PriceTableActions.SearchTickers(searchString));
+        }
+
+        private bool Filter(CryptoPrice info)
+        {
+            if (!string.IsNullOrEmpty(TableState.Value.SearchTerm))
+            {
+                return info.Name.Contains(TableState.Value.SearchTerm, StringComparison.OrdinalIgnoreCase) ||
+                        info.Symbol.Contains(TableState.Value.SearchTerm, StringComparison.OrdinalIgnoreCase);
+            }
+            return true;
+        }
+
+        private void OnPagerClicked()
+        {
+            if (_table.CurrentPage != TableState.Value.PageNumber )
+            {
+                Dispatcher.Dispatch(new PriceTableActions.ChangePageNumber(_table.CurrentPage));
+            }
+            _pageNumber = _table.CurrentPage;
         }
     }
 }

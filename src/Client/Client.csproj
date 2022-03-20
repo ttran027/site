@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="Blazor.UI.Library" Version="1.0.2" />
+    <PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
     <PackageReference Include="FluentValidation" Version="10.4.0" />
     <PackageReference Include="Fluxor" Version="5.0.0" />
     <PackageReference Include="Fluxor.Blazor.Web" Version="5.0.0" />

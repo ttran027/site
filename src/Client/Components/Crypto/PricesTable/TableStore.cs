@@ -1,20 +1,20 @@
 ﻿namespace Client.Components.Crypto.PricesTable
 {
+    public enum PriceTableStatus
+    {
+        Pulling
+    }
+
     public record PriceTableState
     (
         string SearchTerm,
         int PageNumber,
-        int PageSize,
-        int Total,
-        IEnumerable<CryptoPrice> Items,
         bool Loading
     )
     {
         public bool CanGetData()
             => string.IsNullOrEmpty(SearchTerm)
                && PageNumber == 0
-               && Items.Count() == 0
-               && Total == 0
                && Loading is false;
     };
 
@@ -25,7 +25,7 @@
 
         protected override PriceTableState GetInitialState()
         {
-            return new PriceTableState(string.Empty, 0, 5, 0, Array.Empty<CryptoPrice>(), false);
+            return new PriceTableState(string.Empty, 0, false);
         }
     }
 
@@ -37,7 +37,7 @@
 
         public record GetPrices();
 
-        public record GetPricesComplete(IEnumerable<CryptoPrice> Items, int Total);
+        public record GetPricesComplete();
     }
 
     public static class PriceTableReducers
@@ -75,8 +75,6 @@
             return state with
             {
                 Loading = false,
-                Items = action.Items,
-                Total = action.Total,
             };
         }
     }
