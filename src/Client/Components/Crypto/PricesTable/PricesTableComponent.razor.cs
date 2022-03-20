@@ -37,6 +37,15 @@ namespace Client.Components.Crypto.PricesTable
             SearchString = TableState.Value.SearchTerm;
             await InvokeAsync(StateHasChanged);
             ActionSubscriber.SubscribeToAction<PriceTableActions.GetPricesComplete>(this, _ => OnGetPricesAction());
+            ActionSubscriber.SubscribeToAction<PriceTableActions.UpdatePriceComplete>(this, OnUpdatePriceAction);
+        }
+
+        private async void OnUpdatePriceAction(PriceTableActions.UpdatePriceComplete obj)
+        {
+            var index = Items.FindIndex(x => x.Symbol.Equals(obj.NewPrice.Symbol, StringComparison.OrdinalIgnoreCase));
+            Items[index] = obj.NewPrice;
+            _pageNumber = _table.CurrentPage;
+            await InvokeAsync(StateHasChanged);
         }
 
         private async Task OnGetPricesAction()
@@ -47,6 +56,7 @@ namespace Client.Components.Crypto.PricesTable
 
         private void OnSearch(string searchString)
         {
+            _pageNumber = 0;
             Dispatcher.Dispatch(new PriceTableActions.SearchTickers(searchString));
         }
 

@@ -8,6 +8,7 @@ public interface ICryptoPriceCache
     Task<bool> IsEmptyAsync();
     Task SavePricesAsync(IReadOnlyCollection<CryptoPrice> items);
     Task<IReadOnlyCollection<CryptoPrice>> GetPricesAsync();
+    Task UpdatePriceAsync(CryptoPrice item);
 }
 
 public class CryptoPriceCache : ICryptoPriceCache
@@ -29,8 +30,13 @@ public class CryptoPriceCache : ICryptoPriceCache
     {
         foreach (var item in items)
         {
-            await _localStorage.SetItemAsync<CryptoPrice>($"{Prefix}{item.Symbol}", item);
+            await UpdatePriceAsync(item);
         }
+    }
+
+    public async Task UpdatePriceAsync(CryptoPrice item)
+    {
+        await _localStorage.SetItemAsync($"{Prefix}{item.Symbol}", item);
     }
 
     public async Task<IReadOnlyCollection<CryptoPrice>> GetPricesAsync()

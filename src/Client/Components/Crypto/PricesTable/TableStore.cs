@@ -38,6 +38,10 @@
         public record GetPrices();
 
         public record GetPricesComplete();
+
+        public record UpdatePrice(CryptoInfo Crypto);
+
+        public record UpdatePriceComplete(CryptoPrice NewPrice);
     }
 
     public static class PriceTableReducers
