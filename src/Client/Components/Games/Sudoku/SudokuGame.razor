@@ -1,0 +1,26 @@
+﻿<MudContainer Class="d-flex flex-column align-center">
+    <ul>
+        @foreach (var item in blocks)
+        {
+            <li onclick="@(() => SetPointer(item))">
+                <span class="@GetBlockCssClass(item)">@item</span>
+            </li>
+        }
+    </ul>
+
+    <MudContainer Class="d-flex flex-column align-enter mt-3 fit-content">
+        <div class="d-flex flex-row">
+            @foreach(var item in Enumerable.Range(1, 5))
+            {
+                <div class="number-control">@item</div>
+            }
+        </div>
+        <div class="d-flex flex-row mt-2">
+            @foreach(var item in Enumerable.Range(6, 4))
+            {
+                <div class="number-control">@item</div>
+            }
+            <div class="number-control">X</div>
+        </div>  
+    </MudContainer>
+</MudContainer>
