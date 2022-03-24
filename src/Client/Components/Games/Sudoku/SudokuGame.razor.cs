@@ -25,29 +25,28 @@ namespace Client.Components.Games.Sudoku;
 public partial class SudokuGame
 {
     private int? Pointer;
-    private List<int> blocks;
-
+    private List<SudokuBlock> blocks;
     public SudokuGame()
     {
-        blocks = new();
-        foreach (var item in Enumerable.Range(1, 81))
-        {
-            blocks.Add(item);
-        }
+        var test = ",,,,,6,1,8,,,8,,,7,,3,9,,,3,,4,,,7,,,,,,5,,,8,,,9,,,,,,,,1,,,7,,,1,,,,,,9,,,3,,5,,,7,5,,6,,,3,,,2,6,9,,,,,";
+        var list = test.Split(',');
+        blocks = list
+            .Select((e,i) => new SudokuBlock(i, string.IsNullOrEmpty(e) ? null : int.Parse(e), !string.IsNullOrEmpty(e)))
+            .ToList();
     }
 
-    private string GetBlockCssClass(int n)
-     => Pointer == n ? "block-selected" : string.Empty;
+    private string GetBlockCssClass(SudokuBlock b)
+     => Pointer == b.Id ? "block-selected" : string.Empty;
 
-    private void SetPointer(int n)
+    private void SetPointer(SudokuBlock b)
     {
-        if (Pointer == n)
+        if (Pointer == b.Id)
         {
             Pointer = null;
         }
         else
         {
-            Pointer = n;
+            Pointer = b.Id;
         }      
         StateHasChanged();
     }

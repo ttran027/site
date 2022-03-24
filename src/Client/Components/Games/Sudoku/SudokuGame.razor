@@ -3,7 +3,7 @@
         @foreach (var item in blocks)
         {
             <li onclick="@(() => SetPointer(item))">
-                <span class="@GetBlockCssClass(item)">@item</span>
+                <span class="@GetBlockCssClass(item)">@item.Value</span>
             </li>
         }
     </ul>
