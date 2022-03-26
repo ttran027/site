@@ -50,7 +50,7 @@ public abstract class Sudoku
                     {
                         squareBlocks.AddRange(temp2.Skip(k * 9).Take(3));
                     }
-                    SquareGroups.Add(new(i + j, squareBlocks));
+                    SquareGroups.Add(new((j/9) + i, squareBlocks));
                 }
             }
         }
