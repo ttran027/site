@@ -45,9 +45,23 @@ li {
     justify-content: center;
 }
 
-.block-selected
-{
-    background-color: bisque;
+.block-selected {
+    background-color: #E1E1E1;
+    width: calc(1.2rem + 15px);
+    height: calc(1.2rem + 15px);
+    border-radius: 50%;
+    color: var(--mud-palette-black);
+    font-weight: bold;
+}
+
+.block-filled {
+    background-color: #E1E1E1;
+    width: calc(1.2rem + 15px);
+    height: calc(1.2rem + 15px);
+    border-radius: 50%;
+    color: var(--mud-palette-black);
+    font-weight: bold;
+    opacity: 60%;
 }
 
 .number-control {
@@ -62,4 +76,8 @@ li {
 
 .fit-content {
     max-width: fit-content;
+}
+
+.invalid {
+    background-color: orange !important;
 }

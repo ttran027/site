@@ -1,32 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components;
-using System.Net.Http;
-using System.Net.Http.Json;
-using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Components.Routing;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Components.Web.Virtualization;
-using Microsoft.AspNetCore.Components.WebAssembly.Http;
-using Microsoft.JSInterop;
-using Client;
-using Client.Common;
-using MudBlazor;
-using Fluxor;
-using Client.Constants;
-using Blazor.UI.Library;
-using Blazor.UI.Library.Models;
-using Blazor.UI.Library.Components;
-
 namespace Client.Components.Games.Sudoku;
 
 public partial class SudokuGame
 {
+    private string _errorMessage = string.Empty;
     private int? Pointer;
     private List<Sudoku.Block> blocks;
-    private Sudoku.Solver _solver;
     public SudokuGame()
     {
         var test = ",,,,,6,1,8,,,8,,,7,,3,9,,,3,,4,,,7,,,,,,5,,,8,,,9,,,,,,,,1,,,7,,,1,,,,,,9,,,3,,5,,,7,5,,6,,,3,,,2,6,9,,,,,";
@@ -34,22 +12,67 @@ public partial class SudokuGame
         blocks = list
             .Select((e,i) => new Sudoku.Block(i, string.IsNullOrEmpty(e) ? null : int.Parse(e), !string.IsNullOrEmpty(e)))
             .ToList();
-        _solver = new(blocks);
     }
 
     private string GetBlockCssClass(Sudoku.Block b)
-     => Pointer == b.Id ? "block-selected" : string.Empty;
+    {
+        if (b.Hint is false)
+        {
+            var cssClass = "";
+            if (Pointer == b.Id)
+            {
+                cssClass += "block-selected";
+            }
+            else if (b.Value is not null)
+            {
+                cssClass += "block-filled";
+            }
+
+            if (b.Invalid)
+            {
+                cssClass += " invalid";
+            }
+            return cssClass;
+        }
+        return string.Empty;
+    }
+     
 
     private void SetPointer(Sudoku.Block b)
     {
-        if (Pointer == b.Id)
+        if (b.Hint is false)
         {
-            Pointer = null;
+            if (Pointer == b.Id)
+            {
+                Pointer = null;
+            }
+            else
+            {
+                Pointer = b.Id;
+            }
+            StateHasChanged();
+        }       
+    }
+
+    private void SetValue(int? value)
+    {
+        if (Pointer is not null)
+        {
+            var index = blocks.FindIndex(x => x.Id == Pointer && x.Hint is false);
+            if (index != -1)
+            {
+                blocks[index] = blocks[index] with { Value = value, Invalid = false };
+                StateHasChanged();
+            }           
         }
-        else
-        {
-            Pointer = b.Id;
-        }      
+    }
+
+    private void Validate()
+    {
+        _errorMessage = string.Empty;
+        var result = Sudoku.Validate(blocks);
+        blocks = result.Blocks;
+        _errorMessage = result.FormatError;
         StateHasChanged();
     }
 }
