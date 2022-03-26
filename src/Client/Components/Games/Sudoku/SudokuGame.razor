@@ -6,6 +6,15 @@
                 <span class="@GetBlockCssClass(item)">@item.Value</span>
             </li>
         }
+        @*@foreach (var item2 in _solver.SquareGroups)
+        {
+            foreach (var item in item2.Blocks)
+            {
+                <li onclick="@(() => SetPointer(item))">
+                    <span class="@GetBlockCssClass(item)">@item.Value</span>
+                </li>
+            }
+        }*@
     </ul>
 
     <MudContainer Class="d-flex flex-column align-enter mt-3 fit-content">
