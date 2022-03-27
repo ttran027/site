@@ -4,13 +4,24 @@ public abstract class Sudoku
 {
     public record Block(int Id, int? Value, bool Hint, bool Invalid = false)
     {
-        public int RowId() => Id % 9;
+        public Dictionary<int, bool> PossibleValues = new() {
+                { 1, true }, { 2, true }, { 3, true }, { 4, true }, { 5, true }, { 6, true }, { 7, true }, { 8, true }, { 9, true },
+            };
+        public int RowId() => (int) decimal.Floor(Id/9);
 
         public int ColumnId() => Id - (RowId() * 9);
+
+        public bool CanEdit() => Hint is false && PossibleValues.Where(x => x.Value is true).Count() > 1;
+
+        public void MarkNotPossible(int value) => PossibleValues[value] = false;
+
+        public int FirstPossible() => PossibleValues.First(x => x.Value is true).Key;
     };
 
-    public record ValidationResult(bool Success, List<Block> Blocks, string FormatError = "");
+    public record ValidationResult(bool Success, List<Block> Blocks, string FormatError = "", bool Unsafe = false);
     
+    public record Solution(List<Block> Blocks, TimeSpan ElapsedTime);
+
     public static ValidationResult Validate(List<Block> inputBlocks)
     {
         var blocks = new List<Block>();
@@ -27,32 +38,126 @@ public abstract class Sudoku
         }
 
         var invalidBlocks = GetInvalidGameBlocks(game);
-        if (!invalidBlocks.Any())
-        {
-            return new ValidationResult(true, blocks);
-        }
 
-        foreach (var block in invalidBlocks)
+        if (invalidBlocks.Any())
         {
-            blocks[block] = blocks[block] with { Invalid = true };
+            foreach (var block in invalidBlocks)
+            {
+                blocks[block] = blocks[block] with { Invalid = true };
+            }
+            return new ValidationResult(false, blocks, Unsafe: true);          
         }
-
-        return new ValidationResult(false, blocks);
+        return new ValidationResult(!blocks.Any(x => x.Value is null), blocks);
     }
 
-    internal record Group(int Id, List<Block> Blocks)
+    #region Sudoku Solver
+    /*
+     * Source code from: https://www.geeksforgeeks.org/sudoku-backtracking-7/
+     * Usage: SolveSudoku(List<Block> board)
+     * Return: true if success
+     */
+    private static bool IsSafe(List<Block> board, int row, int col, int num)
     {
-        public bool IsValid(int number) => !Blocks.Any(x => x.Value == number);
-    };
+        for (int d = 0; d < 9; d++)
+        {
+            if (board.GetValue(row, d) == num)
+            {
+                return false;
+            }
+        }
 
-    internal record Game(List<Group> RowGroups, List<Group> ColumnGroups, List<Group> SquareGroups)
+        for (int r = 0; r < 9; r++)
+        {
+            if (board.GetValue(r, col) == num)
+            {
+                return false;
+            }
+        }
+
+        int sqrt = (int)Math.Sqrt(9);
+        int boxRowStart = row - row % sqrt;
+        int boxColStart = col - col % sqrt;
+
+        for (int r = boxRowStart;
+            r < boxRowStart + sqrt; r++)
+        {
+            for (int d = boxColStart;
+                d < boxColStart + sqrt; d++)
+            {
+                if (board.GetValue(r, d) == num)
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private static bool SolveSudoku(List<Block> board, int n = 9)
     {
-        public static Game GetGame(List<Block> blocks)
+        int row = -1;
+        int col = -1;
+        bool isEmpty = true;
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (board.GetValue(i, j) == 0)
+                {
+                    row = i;
+                    col = j;
+                    isEmpty = false;
+                    break;
+                }
+            }
+            if (!isEmpty)
+            {
+                break;
+            }
+        }
+
+        if (isEmpty)
+        {
+            return true;
+        }
+
+        for (int num = 1; num <= n; num++)
+        {
+            if (IsSafe(board, row, col, num))
+            {
+                board.SetValue(row, col, num);
+                if (SolveSudoku(board, n))
+                {
+                    return true;
+                }
+                else
+                {
+                    board.SetValue(row, col, 0);
+                }
+            }
+        }
+        return false;
+    }    
+    #endregion
+
+    public static Solution Solve(List<Block> inputBlocks)
+    {
+        var startTime = DateTime.Now;
+        SolveSudoku(inputBlocks);
+        return new Solution(inputBlocks, DateTime.Now - startTime);
+    }
+
+    public record Group(int Id, List<Sudoku.Block> Blocks);
+
+    public record Game(List<Group> RowGroups, List<Group> ColumnGroups, List<Group> SquareGroups)
+    {
+        public static Game GetGame(List<Sudoku.Block> blocks)
         {
             var RowGroups = new List<Group>();
             for (int i = 0; i < 81; i += 9)
             {
-                var rowBlocks = new List<Block>();
+                var rowBlocks = new List<Sudoku.Block>();
                 for (int k = 0; k < 9; k++)
                 {
                     rowBlocks.Add(blocks.ElementAt(i + k));
@@ -78,7 +183,7 @@ public abstract class Sudoku
                 for (int i = 0; i < 3; i++)
                 {
                     var temp2 = temp1.Skip(i * 3);
-                    var squareBlocks = new List<Block>();
+                    var squareBlocks = new List<Sudoku.Block>();
                     for (int k = 0; k < 3; k++)
                     {
                         squareBlocks.AddRange(temp2.Skip(k * 9).Take(3));
@@ -125,8 +230,9 @@ public abstract class Sudoku
     }
 }
 
-internal abstract class SudokuValidator 
+public abstract class SudokuValidator 
 {
+    #region Game Format Validation
     public class GameValidator : AbstractValidator<Sudoku.Game>
     {
         public GameValidator()
@@ -141,7 +247,9 @@ internal abstract class SudokuValidator
                 .SetValidator(new GroupValidator());
         }
     }
+    #endregion
 
+    #region Group Format Validation
     public class GroupValidator : AbstractValidator<Sudoku.Group>
     {
         public GroupValidator()
@@ -158,7 +266,9 @@ internal abstract class SudokuValidator
                 .WithName("Group ID");
         }
     }
+    #endregion
 
+    #region Block Format Validation
     public class BlockValidator : AbstractValidator<Sudoku.Block>
     {
         public BlockValidator()
@@ -173,4 +283,5 @@ internal abstract class SudokuValidator
                 .WithName("Block Value");
         }
     }
+    #endregion
 }

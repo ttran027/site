@@ -2,6 +2,7 @@ namespace Client.Components.Games.Sudoku;
 
 public partial class SudokuGame
 {
+    private bool IsSuccess;
     private string _errorMessage = string.Empty;
     private int? Pointer;
     private List<Sudoku.Block> blocks;
@@ -62,6 +63,7 @@ public partial class SudokuGame
             if (index != -1)
             {
                 blocks[index] = blocks[index] with { Value = value, Invalid = false };
+                Validate();
                 StateHasChanged();
             }           
         }
@@ -71,8 +73,14 @@ public partial class SudokuGame
     {
         _errorMessage = string.Empty;
         var result = Sudoku.Validate(blocks);
+        IsSuccess = result.Success;
         blocks = result.Blocks;
         _errorMessage = result.FormatError;
         StateHasChanged();
+    }
+
+    private void Restart()
+    {
+
     }
 }

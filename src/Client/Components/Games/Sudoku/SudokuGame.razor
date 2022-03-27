@@ -1,43 +1,41 @@
 ﻿<MudContainer Class="d-flex flex-column align-center">
-    <ul>
-        @foreach (var item in blocks)
-        {
-            <li onclick="@(() => SetPointer(item))">
-                <span class="@GetBlockCssClass(item)">@item.Value</span>
-            </li>
-        }
-        @*@foreach (var item2 in _solver.SquareGroups)
-        {
-            foreach (var item in item2.Blocks)
+    @if (!IsSuccess)
+    {
+        <ul>
+            @foreach (var item in blocks)
             {
                 <li onclick="@(() => SetPointer(item))">
                     <span class="@GetBlockCssClass(item)">@item.Value</span>
                 </li>
             }
-        }*@
-    </ul>
+        </ul>
 
-    <MudContainer Class="d-flex flex-column align-enter mt-3 fit-content">
-        <div class="d-flex flex-row">
-            @foreach(var item in Enumerable.Range(1, 5))
-            {
-                <div onclick="@(() => SetValue(item))" class="number-control">@item</div>
-            }
-        </div>
-        <div class="d-flex flex-row mt-2">
-            @foreach(var item in Enumerable.Range(6, 4))
-            {
-                <div onclick="@(() => SetValue(item))" class="number-control">@item</div>
-            }
-            <div onclick="@(() => SetValue(null))" class="number-control">X</div>
-        </div>  
-    </MudContainer>
+        <MudContainer Class="d-flex flex-column align-enter mt-3 fit-content">
+            <div class="d-flex flex-row">
+                @foreach(var item in Enumerable.Range(1, 5))
+                {
+                    <div onclick="@(() => SetValue(item))" class="number-control">@item</div>
+                }
+            </div>
+            <div class="d-flex flex-row mt-2">
+                @foreach(var item in Enumerable.Range(6, 4))
+                {
+                    <div onclick="@(() => SetValue(item))" class="number-control">@item</div>
+                }
+                <div onclick="@(() => SetValue(null))" class="number-control">X</div>
+            </div>  
+        </MudContainer>
 
-    <MudContainer Class="d-flex flex-column align-enter mt-3 fit-content">
-        <MudButton OnClick="Validate">Validate</MudButton>
-        @if (!string.IsNullOrEmpty(_errorMessage))
-        {
-            <p>@_errorMessage</p>
-        }       
-    </MudContainer>
+        <MudContainer Class="d-flex flex-column align-enter mt-3 fit-content">
+            @if (!string.IsNullOrEmpty(_errorMessage))
+            {
+                <p>@_errorMessage</p>
+            }       
+        </MudContainer>
+    }
+    else
+    {
+        <p>Congratulations! You solved the puzzle!</p>
+        <MudButton OnClick="Restart">Play Again</MudButton>
+    }
 </MudContainer>
