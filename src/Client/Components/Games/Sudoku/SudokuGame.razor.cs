@@ -17,6 +17,7 @@ public partial class SudokuGame
     {
         if (firstRender)
         {
+            Dispatcher.Dispatch(new SudokuActions.GetPuzzle());
             SudokuState.StateChanged += HandleStateChanged;
         }
         base.OnAfterRender(firstRender);
@@ -74,8 +75,8 @@ public partial class SudokuGame
         }
     }
 
-    private void Restart()
+    private void StartNewGame()
     {
-
+        Dispatcher.Dispatch(new SudokuActions.NewPuzzle());
     }
 }

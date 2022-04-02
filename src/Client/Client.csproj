@@ -41,9 +41,5 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Components\Games\Sudoku\Store\Effects\" />
-  </ItemGroup>
 	
 </Project>

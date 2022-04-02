@@ -17,9 +17,15 @@ public class SudokuFeature : Feature<SudokuState>
 
 public abstract class SudokuActions
 {
-    public record SetValue(int Id, int? Value);
+    public record StateChanged();
 
-    public record SetPuzzle(List<SudokuBlock> Blocks);
+    public record SetValue(int Id, int? Value) : StateChanged;
+
+    public record NewPuzzle() : StateChanged;
+
+    public record GetPuzzle();
+
+    public record SetPuzzle(bool Success, List<SudokuBlock> Blocks) : StateChanged;
 }
 
 public static class SudokuReducers
@@ -41,6 +47,10 @@ public static class SudokuReducers
     }
 
     [ReducerMethod]
-    public static SudokuState OnSetPuzzke(SudokuState state, SudokuActions.SetPuzzle actions)
-        => state with { IsSuccess = false, Blocks = actions.Blocks };
+    public static SudokuState OnNewPuzzle(SudokuState state, SudokuActions.NewPuzzle _)
+        => state with { IsSuccess = false, Blocks = SudokuExtensions.Generate() };
+
+    [ReducerMethod]
+    public static SudokuState OnSetPuzzle(SudokuState state, SudokuActions.SetPuzzle action)
+        => state with { IsSuccess = action.Success, Blocks = action.Blocks };
 }
