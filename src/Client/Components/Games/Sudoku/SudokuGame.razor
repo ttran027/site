@@ -1,8 +1,8 @@
 ﻿<MudContainer Class="d-flex flex-column align-center">
-    @if (!IsSuccess)
+    @if (!SudokuState.Value.IsSuccess)
     {
         <ul>
-            @foreach (var item in blocks)
+            @foreach (var item in SudokuState.Value.Blocks)
             {
                 <li onclick="@(() => SetPointer(item))">
                     <span class="@GetBlockCssClass(item)">@item.Value</span>
@@ -24,13 +24,6 @@
                 }
                 <div onclick="@(() => SetValue(null))" class="number-control">X</div>
             </div>  
-        </MudContainer>
-
-        <MudContainer Class="d-flex flex-column align-enter mt-3 fit-content">
-            @if (!string.IsNullOrEmpty(_errorMessage))
-            {
-                <p>@_errorMessage</p>
-            }       
         </MudContainer>
     }
     else

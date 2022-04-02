@@ -1,19 +1,33 @@
 using Business.Sudoku;
+using Client.Components.Games.Sudoku.Store;
 
 namespace Client.Components.Games.Sudoku;
 
 public partial class SudokuGame
 {
-    private bool IsSuccess;
-    private string _errorMessage = string.Empty;
     private int? Pointer;
-    private List<Business.Sudoku.Block> blocks;
-    public SudokuGame()
+
+    [Inject]
+    private IState<SudokuState> SudokuState { get; set; } = null!;
+
+    [Inject]
+    private IDispatcher Dispatcher { get; set; } = null!;
+
+    protected override void OnAfterRender(bool firstRender)
     {
-        blocks = SudokuExtensions.Generate();
+        if (firstRender)
+        {
+            SudokuState.StateChanged += HandleStateChanged;
+        }
+        base.OnAfterRender(firstRender);
     }
 
-    private string GetBlockCssClass(Business.Sudoku.Block b)
+    private void HandleStateChanged(object? sender, EventArgs e)
+    {
+        StateHasChanged();
+    }
+
+    private string GetBlockCssClass(SudokuBlock b)
     {
         if (b.Hint is false)
         {
@@ -36,8 +50,7 @@ public partial class SudokuGame
         return string.Empty;
     }
      
-
-    private void SetPointer(Business.Sudoku.Block b)
+    private void SetPointer(SudokuBlock b)
     {
         if (b.Hint is false)
         {
@@ -57,24 +70,8 @@ public partial class SudokuGame
     {
         if (Pointer is not null)
         {
-            var index = blocks.FindIndex(x => x.Id == Pointer && x.Hint is false);
-            if (index != -1)
-            {
-                blocks[index] = blocks[index] with { Value = value, Invalid = false };
-                Validate();
-                StateHasChanged();
-            }           
+            Dispatcher.Dispatch(new SudokuActions.SetValue((int)Pointer, value));         
         }
-    }
-
-    private void Validate()
-    {
-        _errorMessage = string.Empty;
-        var result = blocks.Validate();
-        IsSuccess = result.Success;
-        blocks = result.Blocks;
-        _errorMessage = result.FormatError;
-        StateHasChanged();
     }
 
     private void Restart()

@@ -4,9 +4,9 @@ namespace Business.Sudoku;
 
 public static class SudokuValidatorExtensions
 {
-    public static ValidationResult Validate(this List<Block> inputBlocks)
+    public static ValidationResult Validate(this List<SudokuBlock> inputBlocks)
     {
-        var blocks = new List<Block>();
+        var blocks = new List<SudokuBlock>();
         for (int i = 0; i < inputBlocks.Count; i++)
         {
             blocks.Add(inputBlocks[i] with { Invalid = false });

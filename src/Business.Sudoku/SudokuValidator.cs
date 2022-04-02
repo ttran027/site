@@ -39,7 +39,7 @@ internal class GroupValidator : AbstractValidator<Group>
 #endregion
 
 #region Block Format Validation
-public class BlockValidator : AbstractValidator<Block>
+public class BlockValidator : AbstractValidator<SudokuBlock>
 {
     public BlockValidator()
     {

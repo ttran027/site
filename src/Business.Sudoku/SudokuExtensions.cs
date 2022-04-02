@@ -5,11 +5,11 @@ namespace Business.Sudoku;
 
 public static class SudokuExtensions
 {
-    public static List<Block> Generate()
+    public static List<SudokuBlock> Generate()
     {
         var generator = new StandardPuzzleGenerator();
         var puzzle = generator.Generate(9, 30, TimeSpan.FromSeconds(1));
-        var blocks = new List<Block>();
+        var blocks = new List<SudokuBlock>();
         foreach (var item in Enumerable.Range(0, 81))
         {
             blocks.Add(puzzle.GetBlock(item));
@@ -17,13 +17,13 @@ public static class SudokuExtensions
         return blocks;
     }
 
-    internal static int GetValue(this List<Block> board, int row, int col)
+    internal static int GetValue(this List<SudokuBlock> board, int row, int col)
     {
         var index = board.First(x => x.RowId() == row && x.ColumnId() == col).Id;
         return board[index].Value ?? 0;
     }
 
-    internal static void SetValue(this List<Block> board, int row, int col, int value)
+    internal static void SetValue(this List<SudokuBlock> board, int row, int col, int value)
     {
         var index = board.First(x => x.RowId() == row && x.ColumnId() == col).Id;
         board[index] = board[index] with { Value = value };
@@ -38,18 +38,18 @@ public static class SudokuExtensions
         return new Coordinate(row, col);
     }
 
-    internal static Block GetBlock(this PuzzleWithPossibleValues p, int id)
+    internal static SudokuBlock GetBlock(this PuzzleWithPossibleValues p, int id)
     {
         var val = p[id.ToCoordinate()];
-        return new Block(id, val, val is not null);
+        return new SudokuBlock(id, val, val is not null);
     }
    
-    internal static Game GetGame(this List<Block> blocks)
+    internal static Game GetGame(this List<SudokuBlock> blocks)
     {
         var RowGroups = new List<Group>();
         for (int i = 0; i < 81; i += 9)
         {
-            var rowBlocks = new List<Block>();
+            var rowBlocks = new List<SudokuBlock>();
             for (int k = 0; k < 9; k++)
             {
                 rowBlocks.Add(blocks.ElementAt(i + k));
@@ -60,7 +60,7 @@ public static class SudokuExtensions
         var ColumnGroups = new List<Group>();
         for (int i = 0; i < 9; i++)
         {
-            var columnBlocks = new List<Block>();
+            var columnBlocks = new List<SudokuBlock>();
             for (int k = 0; k < 81; k += 9)
             {
                 columnBlocks.Add(blocks.ElementAt(i + k));
@@ -75,7 +75,7 @@ public static class SudokuExtensions
             for (int i = 0; i < 3; i++)
             {
                 var temp2 = temp1.Skip(i * 3);
-                var squareBlocks = new List<Block>();
+                var squareBlocks = new List<SudokuBlock>();
                 for (int k = 0; k < 3; k++)
                 {
                     squareBlocks.AddRange(temp2.Skip(k * 9).Take(3));
