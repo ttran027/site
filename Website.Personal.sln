@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{C5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business.Queries", "src\Business.Queries\Business.Queries.csproj", "{A5555A0F-28D0-4FEB-8825-5A5960B1C41D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "src\Demo\Demo.csproj", "{F583D67D-ECD1-4ECB-8C1A-A3EE7DB7E0CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.Sudoku", "src\Business.Sudoku\Business.Sudoku.csproj", "{858A4AAC-46F3-45A4-9AD6-895044A0E009}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,16 +25,17 @@ Global
 		{A5555A0F-28D0-4FEB-8825-5A5960B1C41D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5555A0F-28D0-4FEB-8825-5A5960B1C41D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5555A0F-28D0-4FEB-8825-5A5960B1C41D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F583D67D-ECD1-4ECB-8C1A-A3EE7DB7E0CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F583D67D-ECD1-4ECB-8C1A-A3EE7DB7E0CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F583D67D-ECD1-4ECB-8C1A-A3EE7DB7E0CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F583D67D-ECD1-4ECB-8C1A-A3EE7DB7E0CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{858A4AAC-46F3-45A4-9AD6-895044A0E009}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{858A4AAC-46F3-45A4-9AD6-895044A0E009}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{858A4AAC-46F3-45A4-9AD6-895044A0E009}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{858A4AAC-46F3-45A4-9AD6-895044A0E009}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A5555A0F-28D0-4FEB-8825-5A5960B1C41D} = {C5F09132-112D-49DF-A4C4-29D0B8EFA5FD}
+		{858A4AAC-46F3-45A4-9AD6-895044A0E009} = {C5F09132-112D-49DF-A4C4-29D0B8EFA5FD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A3D2E96-0525-4DEE-AE09-D71EA03E9E3F}

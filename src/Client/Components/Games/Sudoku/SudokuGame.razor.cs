@@ -1,3 +1,5 @@
+using Business.Sudoku;
+
 namespace Client.Components.Games.Sudoku;
 
 public partial class SudokuGame
@@ -5,17 +7,13 @@ public partial class SudokuGame
     private bool IsSuccess;
     private string _errorMessage = string.Empty;
     private int? Pointer;
-    private List<Sudoku.Block> blocks;
+    private List<Business.Sudoku.Block> blocks;
     public SudokuGame()
     {
-        var test = ",,,,,6,1,8,,,8,,,7,,3,9,,,3,,4,,,7,,,,,,5,,,8,,,9,,,,,,,,1,,,7,,,1,,,,,,9,,,3,,5,,,7,5,,6,,,3,,,2,6,9,,,,,";
-        var list = test.Split(',');
-        blocks = list
-            .Select((e,i) => new Sudoku.Block(i, string.IsNullOrEmpty(e) ? null : int.Parse(e), !string.IsNullOrEmpty(e)))
-            .ToList();
+        blocks = SudokuExtensions.Generate();
     }
 
-    private string GetBlockCssClass(Sudoku.Block b)
+    private string GetBlockCssClass(Business.Sudoku.Block b)
     {
         if (b.Hint is false)
         {
@@ -39,7 +37,7 @@ public partial class SudokuGame
     }
      
 
-    private void SetPointer(Sudoku.Block b)
+    private void SetPointer(Business.Sudoku.Block b)
     {
         if (b.Hint is false)
         {
@@ -72,7 +70,7 @@ public partial class SudokuGame
     private void Validate()
     {
         _errorMessage = string.Empty;
-        var result = Sudoku.Validate(blocks);
+        var result = blocks.Validate();
         IsSuccess = result.Success;
         blocks = result.Blocks;
         _errorMessage = result.FormatError;
