@@ -32,4 +32,5 @@ builder.Services.AddSingleton<ApplicationSettings>(new ApplicationSettings()
 builder.Services.AddBlazorUILibrary();
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddTransient<ICryptoPriceCache, CryptoPriceCache>();
+builder.Services.AddTransient<ISudokuCache, SudokuCache>();
 await builder.Build().RunAsync();
