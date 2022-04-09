@@ -1,29 +1,20 @@
 using Blazored.LocalStorage;
-using Business.Queries;
-using Business.Queries.Crypto;
 using Client;
-using Client.Cache;
+using Client.CryptoPrices;
+using Client.Sudoku;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
-builder.Services.AddMediatR(typeof(Program), typeof(QuerySettings));
+builder.Services.AddMediatR(typeof(Program), typeof(CryptoQuerySettings));
 builder.Services.AddFluxor(options => 
     {
-        options.ScanAssemblies(typeof(Program).Assembly);
+        options.ScanAssemblies(typeof(Program).Assembly, typeof(CryptoPriceQuery).Assembly, typeof(SudokuCache).Assembly);
         options.UseRouting();
     });
 
-var querySettings = new QuerySettings()
-{
-    CryptoSettings = new()
-    {
-        BinanceAddress = "https://api.binance.com/api/v3/",
-    }
-};
-builder.Services.AddSingleton<CryptoQuerySettings>(querySettings.CryptoSettings);
 builder.Services.AddSingleton<ApplicationSettings>(new ApplicationSettings()
 {
     ResumeUrl = builder.HostEnvironment.BaseAddress + "resume.json",

@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using Client.Shared;
+using System.Net.Http.Json;
 
 namespace Client.Constants;
 

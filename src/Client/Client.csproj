@@ -15,16 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blazor.UI.Library" Version="1.0.2" />
-    <PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
-    <PackageReference Include="FluentValidation" Version="10.4.0" />
-    <PackageReference Include="Fluxor" Version="5.0.0" />
-    <PackageReference Include="Fluxor.Blazor.Web" Version="5.0.0" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.3" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
-    <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,8 +24,8 @@
   </ItemGroup>
 	
   <ItemGroup>
-    <ProjectReference Include="..\Business.Queries\Business.Queries.csproj" />
-    <ProjectReference Include="..\Business.Sudoku\Business.Sudoku.csproj" />
+    <ProjectReference Include="..\Client.CryptoPrices\Client.CryptoPrices.csproj" />
+    <ProjectReference Include="..\Client.Sudoku\Client.Sudoku.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,5 +33,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-	
+
+	<ItemGroup>
+		<BlazorWebAssemblyLazyLoad Include="Client.Sudoku.dll" />
+		<BlazorWebAssemblyLazyLoad Include="Client.CryptoPrices.dll" />
+	</ItemGroup>	
 </Project>

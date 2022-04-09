@@ -1,7 +1,12 @@
 ﻿@using Client.Components.Layouts
+@using System.Reflection
+@using Microsoft.AspNetCore.Components.WebAssembly.Services
+@inject LazyAssemblyLoader AssemblyLoader
 
 <Fluxor.Blazor.Web.StoreInitializer/>
-<Router AppAssembly="@typeof(App).Assembly">
+<Router AppAssembly="@typeof(App).Assembly"
+        OnNavigateAsync="OnNavigateAsync"
+        AdditionalAssemblies="_lazyLoadedAssemblies">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
         <FocusOnNavigate RouteData="@routeData" Selector="h1" />
@@ -14,3 +19,21 @@
     </NotFound>
 </Router>
 <BlazorUILibraryProvider Theme="@Themes.DarkTheme"/>
+
+@code
+{
+    private List<Assembly> _lazyLoadedAssemblies = new List<Assembly>();
+    private async Task OnNavigateAsync(NavigationContext context)
+    {
+        if (context.Path == "sudoku")
+        {
+            var assemblies = await AssemblyLoader.LoadAssembliesAsync(new[] { "Client.Sudoku.dll" });
+            _lazyLoadedAssemblies.AddRange(assemblies);
+        }
+        else if (context.Path == "calculators")
+        {
+            var assemblies = await AssemblyLoader.LoadAssembliesAsync(new[] { "Client.Sudoku.dll" });
+            _lazyLoadedAssemblies.AddRange(assemblies);
+        }
+    }
+}
