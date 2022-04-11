@@ -2,10 +2,10 @@
 @using Client.Shared
 <PageTitleComponent Title="Games"/>
 <MudContainer Class="d-flex flex-column align-center">
-    @if (!SudokuState.Value.IsSuccess)
+    @if (!_game.IsSuccess)
     {
         <ul>
-            @foreach (var item in SudokuState.Value.Blocks)
+            @foreach (var item in _game.Blocks)
             {
                 <li onclick="@(() => SetPointer(item))">
                     <span class="@GetBlockCssClass(item)">@item.Value</span>

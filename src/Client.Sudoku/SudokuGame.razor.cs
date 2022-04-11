@@ -1,34 +1,33 @@
-using Client.Contract.Models.Sudoku;
-using Client.Contract.Stores;
-using Fluxor;
+using Client.Contract.Interfaces;
+using Client.Sudoku.Models;
 using Microsoft.AspNetCore.Components;
 
 namespace Client.Sudoku;
 
 public partial class SudokuGame
 {
+    private const string CacheKey = "heima.games.sudoku";
+
     private int? Pointer;
 
-    [Inject]
-    private IState<SudokuState> SudokuState { get; set; } = null!;
+    private SudokuCache _game = new(false, new());
 
-    [Inject]
-    private IDispatcher Dispatcher { get; set; } = null!;
+    [Inject] ICacheService CacheService { get;set; } = null!;
 
-    protected override void OnAfterRender(bool firstRender)
+    protected override async Task OnInitializedAsync()
     {
-        if (firstRender)
+        var cache = await CacheService.GetAsync<SudokuCache>(CacheKey);
+
+        if (cache.IsSuccess)
         {
-            Dispatcher.Dispatch(new SudokuActions.GetPuzzle());
-            SudokuState.StateChanged += HandleStateChanged;
+            _game = cache.Value;
         }
-        base.OnAfterRender(firstRender);
+        else
+        {
+            await StartNewGame();
+        }
     }
 
-    private void HandleStateChanged(object? sender, EventArgs e)
-    {
-        StateHasChanged();
-    }
 
     private string GetBlockCssClass(SudokuBlock b)
     {
@@ -69,16 +68,31 @@ public partial class SudokuGame
         }
     }
 
-    private void SetValue(int? value)
+    private async Task SetValue(int? value)
     {
         if (Pointer is not null)
         {
-            Dispatcher.Dispatch(new SudokuActions.SetValue((int)Pointer, value));
+            var index = _game.Blocks.FindIndex(x => x.Id == Pointer && x.Hint is false);
+            if (index != -1)
+            {
+                _game.Blocks[index] = _game.Blocks[index] with { Value = value, Invalid = false };
+            }
+            var result = _game.Blocks.Validate();
+            _game = new(result.Success, result.Blocks);
+            await SaveToCache();
+            StateHasChanged();
         }
     }
 
-    private void StartNewGame()
+    private async Task StartNewGame()
     {
-        Dispatcher.Dispatch(new SudokuActions.SetPuzzle(false, SudokuExtensions.Generate()));
+        _game = new(false, SudokuExtensions.Generate());
+        await SaveToCache();
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task SaveToCache()
+    {
+        await CacheService.SaveAsync(CacheKey, _game);
     }
 }

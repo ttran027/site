@@ -2,7 +2,6 @@ using Blazored.LocalStorage;
 using Client;
 using Client.Business;
 using Client.Contract.Interfaces;
-using Client.Contract.Stores;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -12,7 +11,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddMediatR(typeof(Program), typeof(CacheService));
 builder.Services.AddFluxor(options => 
     {
-        options.ScanAssemblies(typeof(Program).Assembly, typeof(SudokuState).Assembly);
+        options.ScanAssemblies(typeof(Program).Assembly, typeof(CacheService).Assembly);
         options.UseRouting();
     });
 

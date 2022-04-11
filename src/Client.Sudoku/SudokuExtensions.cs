@@ -1,4 +1,4 @@
-﻿using Client.Contract.Models.Sudoku;
+﻿using Client.Sudoku.Models;
 using SudokuSpice;
 using SudokuSpice.RuleBased;
 
@@ -6,7 +6,7 @@ namespace Client.Sudoku;
 
 internal static class SudokuExtensions
 {
-    public static List<SudokuBlock> Generate()
+    internal static List<SudokuBlock> Generate()
     {
         var generator = new StandardPuzzleGenerator();
         var puzzle = generator.Generate(9, 30, TimeSpan.FromSeconds(1));
