@@ -1,5 +1,6 @@
 ﻿@using Client.Components.Layouts
 @using System.Reflection
+@using Client.Contract
 @using Microsoft.AspNetCore.Components.WebAssembly.Services
 @inject LazyAssemblyLoader AssemblyLoader
 
@@ -25,14 +26,14 @@
     private List<Assembly> _lazyLoadedAssemblies = new List<Assembly>();
     private async Task OnNavigateAsync(NavigationContext context)
     {
-        if (context.Path == "sudoku")
+        if (context.Path == Routes.Sudoku)
         {
             var assemblies = await AssemblyLoader.LoadAssembliesAsync(new[] { "Client.Sudoku.dll" });
             _lazyLoadedAssemblies.AddRange(assemblies);
         }
-        else if (context.Path == "calculators")
+        else if (context.Path == Routes.Calculators)
         {
-            var assemblies = await AssemblyLoader.LoadAssembliesAsync(new[] { "Client.Sudoku.dll" });
+            var assemblies = await AssemblyLoader.LoadAssembliesAsync(new[] { "Client.CryptoPrices.dll" });
             _lazyLoadedAssemblies.AddRange(assemblies);
         }
     }

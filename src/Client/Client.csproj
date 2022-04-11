@@ -24,6 +24,7 @@
   </ItemGroup>
 	
   <ItemGroup>
+    <ProjectReference Include="..\Client.Business\Client.Business.csproj" />
     <ProjectReference Include="..\Client.CryptoPrices\Client.CryptoPrices.csproj" />
     <ProjectReference Include="..\Client.Sudoku\Client.Sudoku.csproj" />
   </ItemGroup>
@@ -37,5 +38,9 @@
 	<ItemGroup>
 		<BlazorWebAssemblyLazyLoad Include="Client.Sudoku.dll" />
 		<BlazorWebAssemblyLazyLoad Include="Client.CryptoPrices.dll" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Stores\Sudoku\" />
 	</ItemGroup>	
 </Project>

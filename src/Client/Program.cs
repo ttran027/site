@@ -1,17 +1,18 @@
 using Blazored.LocalStorage;
 using Client;
-using Client.CryptoPrices;
-using Client.Sudoku;
+using Client.Business;
+using Client.Contract.Interfaces;
+using Client.Contract.Stores;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
-builder.Services.AddMediatR(typeof(Program), typeof(CryptoQuerySettings));
+builder.Services.AddMediatR(typeof(Program), typeof(CacheService));
 builder.Services.AddFluxor(options => 
     {
-        options.ScanAssemblies(typeof(Program).Assembly, typeof(CryptoPriceQuery).Assembly, typeof(SudokuCache).Assembly);
+        options.ScanAssemblies(typeof(Program).Assembly, typeof(SudokuState).Assembly);
         options.UseRouting();
     });
 
@@ -22,6 +23,5 @@ builder.Services.AddSingleton<ApplicationSettings>(new ApplicationSettings()
 
 builder.Services.AddBlazorUILibrary();
 builder.Services.AddBlazoredLocalStorage();
-builder.Services.AddTransient<ICryptoPriceCache, CryptoPriceCache>();
-builder.Services.AddTransient<ISudokuCache, SudokuCache>();
+builder.Services.AddTransient<ICacheService, CacheService>();
 await builder.Build().RunAsync();

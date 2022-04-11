@@ -1,4 +1,6 @@
-﻿using Fluxor;
+﻿using Client.Contract.Models.Crypto;
+using Client.Contract.Stores;
+using Fluxor;
 using Microsoft.AspNetCore.Components;
 
 namespace Client.CryptoPrices.PricesTable

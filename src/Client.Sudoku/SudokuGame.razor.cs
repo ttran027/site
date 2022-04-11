@@ -1,5 +1,5 @@
-using Client.Sudoku.Models;
-using Client.Sudoku.Store;
+using Client.Contract.Models.Sudoku;
+using Client.Contract.Stores;
 using Fluxor;
 using Microsoft.AspNetCore.Components;
 
@@ -79,6 +79,6 @@ public partial class SudokuGame
 
     private void StartNewGame()
     {
-        Dispatcher.Dispatch(new SudokuActions.NewPuzzle());
+        Dispatcher.Dispatch(new SudokuActions.SetPuzzle(false, SudokuExtensions.Generate()));
     }
 }

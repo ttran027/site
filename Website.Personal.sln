@@ -9,7 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client.Sudoku", "src\Client
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client.Shared", "src\Client.Shared\Client.Shared.csproj", "{3BFE7502-CC34-4B14-B43B-CD9A4184AE61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.CryptoPrices", "src\Client.CryptoPrices\Client.CryptoPrices.csproj", "{4EDD4011-6D4B-4068-943B-B0E60A6E3A4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client.CryptoPrices", "src\Client.CryptoPrices\Client.CryptoPrices.csproj", "{4EDD4011-6D4B-4068-943B-B0E60A6E3A4D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client.Business", "src\Client.Business\Client.Business.csproj", "{99B3C38D-E010-4BB2-8B6E-6C5BB6EEAB59}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client.Contract", "src\Client.Contract\Client.Contract.csproj", "{8DA8C3C3-6B3F-4825-9B4B-54F3E4AF6B4B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{5CD489C1-0276-4EBD-87DE-5816145D0ABA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +39,22 @@ Global
 		{4EDD4011-6D4B-4068-943B-B0E60A6E3A4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EDD4011-6D4B-4068-943B-B0E60A6E3A4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EDD4011-6D4B-4068-943B-B0E60A6E3A4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99B3C38D-E010-4BB2-8B6E-6C5BB6EEAB59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99B3C38D-E010-4BB2-8B6E-6C5BB6EEAB59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99B3C38D-E010-4BB2-8B6E-6C5BB6EEAB59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99B3C38D-E010-4BB2-8B6E-6C5BB6EEAB59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DA8C3C3-6B3F-4825-9B4B-54F3E4AF6B4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DA8C3C3-6B3F-4825-9B4B-54F3E4AF6B4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DA8C3C3-6B3F-4825-9B4B-54F3E4AF6B4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DA8C3C3-6B3F-4825-9B4B-54F3E4AF6B4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5EA7B195-D868-467B-A9EE-B9CCA68448E6} = {5CD489C1-0276-4EBD-87DE-5816145D0ABA}
+		{3BFE7502-CC34-4B14-B43B-CD9A4184AE61} = {5CD489C1-0276-4EBD-87DE-5816145D0ABA}
+		{4EDD4011-6D4B-4068-943B-B0E60A6E3A4D} = {5CD489C1-0276-4EBD-87DE-5816145D0ABA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A3D2E96-0525-4DEE-AE09-D71EA03E9E3F}

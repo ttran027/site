@@ -1,4 +1,6 @@
-﻿using Fluxor;
+﻿using Client.Contract.Models.Crypto;
+using Client.Contract.Stores;
+using Fluxor;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
@@ -19,22 +21,13 @@ namespace Client.CryptoPrices.PricesTable
         [Inject]
         private IActionSubscriber ActionSubscriber { get; set; } = null!;
 
-        [Inject]
-        private ICryptoPriceCache Cache { get; set; } = null!;
-
         protected async override Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
             if (!firstRender) return;
+        
+            Dispatcher.Dispatch(new PriceTableActions.GetPrices());
 
-            if (!await Cache.IsCacheValid())
-            {
-                Dispatcher.Dispatch(new PriceTableActions.GetPrices());
-            }
-            else
-            {
-                Items = (await Cache.GetPricesAsync()).ToList();
-            }
             _pageNumber = TableState.Value.PageNumber;
             SearchString = TableState.Value.SearchTerm;
             await InvokeAsync(StateHasChanged);
@@ -52,7 +45,7 @@ namespace Client.CryptoPrices.PricesTable
 
         private async Task OnGetPricesAction()
         {
-            Items = (await Cache.GetPricesAsync()).ToList();
+            Items = TableState.Value.Items.ToList();
             await InvokeAsync(StateHasChanged);
         }
 
