@@ -1,6 +1,5 @@
-﻿using Client.Contract.Models.Crypto;
-using Client.Contract.Stores;
-using Fluxor;
+﻿using Client.Contract.Interfaces;
+using Client.CryptoPrices.Models;
 using Microsoft.AspNetCore.Components;
 
 namespace Client.CryptoPrices.PricesTable
@@ -8,32 +7,62 @@ namespace Client.CryptoPrices.PricesTable
     public partial class CryptoPriceComponent : IDisposable
     {
         private Timer? _timer;
+        private readonly BinancePriceFetcher _fetcher = new();
+        private CryptoPrice? Price;
+        private string Key => CryptoConstants.CacheKey(Crypto.Symbol);
+
         [Parameter]
         [EditorRequired]
-        public CryptoPrice Price { get; set; } = null!;
+        public CryptoInfo Crypto { get; set; } = null!;
 
         [Inject]
-        private IDispatcher Dispatcher { get; set; } = null!;
+        private ICacheService CacheService { get; set; } = null!;
 
         public void Dispose()
         {
             _timer?.Dispose();
         }
 
-        protected override void OnAfterRender(bool firstRender)
+        protected async override Task OnInitializedAsync()
         {
-            if (!firstRender) return;
+            var cache = await CacheService.GetAsync<CryptoPrice>(Key);
 
-            _timer = new Timer(UpdatePrice, null, 0, 10000);
+            if (cache.IsSuccess)
+            {
+                Price = cache.Value;
+            }
+            else
+            {
+                var p1 = await _fetcher.GetPriceAsync(Crypto.Symbol);
 
-            base.OnAfterRender(firstRender);
+                if (p1.IsSuccess)
+                {
+                    await CacheService.SaveAsync(Key, p1.Value);
+                    Price = p1.Value;
+                }
+            }
         }
 
-        private void UpdatePrice(object? state)
+        protected override Task OnAfterRenderAsync(bool firstRender)
         {
-            if ((DateTime.Now - Price.LastUpdated).TotalSeconds > 10)
+            if (firstRender)
             {
-                Dispatcher.Dispatch(new PriceTableActions.UpdatePrice(new CryptoInfo(Price.Symbol, Price.Name)));
+                _timer = new Timer(UpdatePrice, null, 0, 10000);
+            }
+            return base.OnAfterRenderAsync(firstRender);
+        }
+
+        private async void UpdatePrice(object? state)
+        {
+            if (Price is not null && (DateTime.Now - Price.LastUpdated).TotalSeconds > 10)
+            {
+                var p = await _fetcher.GetPriceAsync(Crypto.Symbol);
+
+                if (p.IsSuccess)
+                {
+                    await CacheService.SaveAsync(Key, p.Value);
+                    StateHasChanged();
+                }
             }
         }
 

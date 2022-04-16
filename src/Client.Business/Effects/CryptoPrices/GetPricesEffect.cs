@@ -1,10 +1,5 @@
-﻿using Client.Business.Queries;
-using Client.Contract.Constants;
+﻿using Client.Contract.Constants;
 using Client.Contract.Interfaces;
-using Client.Contract.Models.Crypto;
-using Client.Contract.Stores;
-using Fluxor;
-using MediatR;
 
 namespace Client.Business.Effects.CryptoPrices;
 

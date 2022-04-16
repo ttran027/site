@@ -4,7 +4,6 @@
 @using Microsoft.AspNetCore.Components.WebAssembly.Services
 @inject LazyAssemblyLoader AssemblyLoader
 
-<Fluxor.Blazor.Web.StoreInitializer/>
 <Router AppAssembly="@typeof(App).Assembly"
         OnNavigateAsync="OnNavigateAsync"
         AdditionalAssemblies="_lazyLoadedAssemblies">
@@ -19,7 +18,9 @@
         </LayoutView>
     </NotFound>
 </Router>
-<BlazorUILibraryProvider Theme="@Themes.DarkTheme"/>
+<MudThemeProvider Theme="@Themes.DarkTheme"/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
 
 @code
 {

@@ -1,17 +1,11 @@
-﻿@using Fluxor.Blazor.Web.Components
-
-@inherits FluxorComponent
-
-<MudTable Items="@Items"
+﻿<MudTable ServerData="@GetItems"
+          T="CryptoInfo"
           Elevation="0"
           RowsPerPage="5" 
           Hover="true" 
           Style="background-color: inherit; max-width: 390px !important; width: auto !important; min-width: 350px !important;" 
           Breakpoint="Breakpoint.Sm"
           Class="fit-content"
-          Filter="@Filter"
-          Loading="@TableState.Value.Loading"
-          CurrentPage="@_pageNumber"
           @ref="@_table">
     <ToolBarContent>
             <MudTextField @bind-Value="@SearchString"
@@ -36,12 +30,10 @@
                 }                    
             </MudContainer>
             <MudSpacer/>
-            <CryptoPriceComponent Price="@context"/>                          
+            <CryptoPriceComponent Crypto="@context"/>                          
         </MudTd>
     </RowTemplate>
     <PagerContent >
-        <div @onmouseleave="OnPagerClicked" @ontouchenter="OnPagerClicked">
-            <MudTablePager HideRowsPerPage/>
-        </div>       
+        <MudTablePager HideRowsPerPage/>
     </PagerContent>
 </MudTable>

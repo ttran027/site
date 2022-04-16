@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Client.Contract\Client.Contract.csproj" />
     <ProjectReference Include="..\Client.Shared\Client.Shared.csproj" />
   </ItemGroup>

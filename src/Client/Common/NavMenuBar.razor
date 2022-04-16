@@ -1,0 +1,35 @@
+﻿@if (Bottom)
+{
+    <MudHidden Breakpoint="Breakpoint.Xs" Invert>
+            <MudAppBar Bottom>
+                <MudSpacer/>
+                @foreach (var item in Items)
+               {
+                   <BottomNavButton Icon="@item.Icon"
+                                    Href="@item.Href"
+                                    Name="@item.Title"
+                                    IsHome="@item.IsHome"/>
+                    <MudSpacer/>
+               }
+            </MudAppBar>
+    </MudHidden>
+}
+else
+{
+    <MudNavMenu Class="mud-width-full">
+        @foreach (var item in Items)
+        {
+            <MudNavLink Icon="@item.Icon" Href="@item.Href">@item.Title</MudNavLink>
+        }
+    </MudNavMenu>        
+}
+
+
+
+@code{
+    [Parameter, EditorRequired]
+    public ICollection<NavMenuItem> Items { get; set; } = null!;
+
+    [Parameter]
+    public bool Bottom { get; set; }
+}

@@ -15,8 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.3" PrivateAssets="all" />
+    <PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.4" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,7 +25,7 @@
   </ItemGroup>
 	
   <ItemGroup>
-    <ProjectReference Include="..\Client.Business\Client.Business.csproj" />
+    <ProjectReference Include="..\Client.Contract\Client.Contract.csproj" />
     <ProjectReference Include="..\Client.CryptoPrices\Client.CryptoPrices.csproj" />
     <ProjectReference Include="..\Client.Sudoku\Client.Sudoku.csproj" />
   </ItemGroup>
@@ -38,9 +39,5 @@
 	<ItemGroup>
 		<BlazorWebAssemblyLazyLoad Include="Client.Sudoku.dll" />
 		<BlazorWebAssemblyLazyLoad Include="Client.CryptoPrices.dll" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Stores\Sudoku\" />
 	</ItemGroup>	
 </Project>

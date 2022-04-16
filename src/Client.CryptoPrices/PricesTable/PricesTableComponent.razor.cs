@@ -1,83 +1,53 @@
-﻿using Client.Contract.Models.Crypto;
-using Client.Contract.Stores;
-using Fluxor;
+﻿using Client.Contract.Interfaces;
+using Client.CryptoPrices.Models;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
 namespace Client.CryptoPrices.PricesTable
 {
-    public partial class PricesTableComponent : IDisposable
+    public partial class PricesTableComponent
     {
-        private MudTable<CryptoPrice> _table;
+        private static string TableStateKey => CryptoConstants.CacheKey("tablestate");
+        private MudTable<CryptoInfo> _table;
         private string SearchString = string.Empty;
-        private List<CryptoPrice> Items = new();
-        private int _pageNumber = 0;
-        [Inject]
-        private IState<PriceTableState> TableState { get; set; } = null!;
 
         [Inject]
-        private IDispatcher Dispatcher { get; set; } = null!;
-
-        [Inject]
-        private IActionSubscriber ActionSubscriber { get; set; } = null!;
+        private ICacheService CacheService { get; set; } = null!;
 
         protected async override Task OnAfterRenderAsync(bool firstRender)
         {
-            await base.OnAfterRenderAsync(firstRender);
             if (!firstRender) return;
-        
-            Dispatcher.Dispatch(new PriceTableActions.GetPrices());
 
-            _pageNumber = TableState.Value.PageNumber;
-            SearchString = TableState.Value.SearchTerm;
-            await InvokeAsync(StateHasChanged);
-            ActionSubscriber.SubscribeToAction<PriceTableActions.GetPricesComplete>(this, _ => OnGetPricesAction());
-            ActionSubscriber.SubscribeToAction<PriceTableActions.UpdatePriceComplete>(this, OnUpdatePriceAction);
-        }
-
-        private async void OnUpdatePriceAction(PriceTableActions.UpdatePriceComplete obj)
-        {
-            var index = Items.FindIndex(x => x.Symbol.Equals(obj.NewPrice.Symbol, StringComparison.OrdinalIgnoreCase));
-            Items[index] = obj.NewPrice;
-            _pageNumber = _table.CurrentPage;
-            await InvokeAsync(StateHasChanged);
-        }
-
-        private async Task OnGetPricesAction()
-        {
-            Items = TableState.Value.Items.ToList();
-            await InvokeAsync(StateHasChanged);
+            var tableState = await CacheService.GetAsync<PriceTableState>(TableStateKey);
+            if (tableState.IsSuccess)
+            {
+                _table.CurrentPage = tableState.Value.PageNumber;
+                SearchString = tableState.Value.SearchString;
+            }
+            
+            _table.ReloadServerData();
         }
 
         private void OnSearch(string searchString)
         {
-            _pageNumber = 0;
-            Dispatcher.Dispatch(new PriceTableActions.SearchTickers(searchString));
+            _table.ReloadServerData();
         }
 
-        private bool Filter(CryptoPrice info)
+        private async Task<TableData<CryptoInfo>> GetItems(TableState tableState)
         {
-            if (!string.IsNullOrEmpty(TableState.Value.SearchTerm))
+            IEnumerable<CryptoInfo> items = CryptoAssets.Assets;
+            await CacheService.SaveAsync(TableStateKey, new PriceTableState(tableState.Page, SearchString));
+            if (!string.IsNullOrEmpty(SearchString))
             {
-                return info.Name.Contains(TableState.Value.SearchTerm, StringComparison.OrdinalIgnoreCase) ||
-                        info.Symbol.Contains(TableState.Value.SearchTerm, StringComparison.OrdinalIgnoreCase);
+                items = items.Where(c => c.Name.Contains(SearchString, StringComparison.OrdinalIgnoreCase) ||
+                            c.Symbol.Contains(SearchString, StringComparison.OrdinalIgnoreCase));
             }
-            return true;
-        }
 
-        private void OnPagerClicked()
-        {
-            if (_table.CurrentPage != TableState.Value.PageNumber)
+            return new TableData<CryptoInfo>()
             {
-                Dispatcher.Dispatch(new PriceTableActions.ChangePageNumber(_table.CurrentPage));
-            }
-            _pageNumber = _table.CurrentPage;
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            ActionSubscriber.UnsubscribeFromAllActions(this);
-            base.Dispose(disposing);
+                Items = items.Skip(tableState.Page * 5).Take(5),
+                TotalItems = items.Count(),
+            };
         }
     }
 }

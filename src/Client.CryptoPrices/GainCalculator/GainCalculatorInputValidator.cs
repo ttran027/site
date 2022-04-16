@@ -1,4 +1,4 @@
-﻿using Client.Contract.Models.Crypto;
+﻿using Client.CryptoPrices.Models;
 using FluentValidation;
 
 namespace Client.CryptoPrices.GainCalculator
