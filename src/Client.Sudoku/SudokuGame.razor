@@ -1,0 +1,38 @@
+﻿@page "/games"
+@using Client.Shared
+<PageTitleComponent Title="Games"/>
+<MudContainer Class="d-flex flex-column align-center">
+    @if (!_game.IsSuccess)
+    {
+        <ul>
+            @foreach (var item in _game.Blocks)
+            {
+                <li onclick="@(() => SetPointer(item))">
+                    <span class="@GetBlockCssClass(item)">@item.Value</span>
+                </li>
+            }
+        </ul>
+
+        <MudContainer Class="d-flex flex-column align-enter mt-3 fit-content">
+            <div class="d-flex flex-row">
+                @foreach(var item in Enumerable.Range(1, 5))
+                {
+                    <div onclick="@(() => SetValue(item))" class="number-control">@item</div>
+                }
+            </div>
+            <div class="d-flex flex-row mt-2">
+                @foreach(var item in Enumerable.Range(6, 4))
+                {
+                    <div onclick="@(() => SetValue(item))" class="number-control">@item</div>
+                }
+                <div onclick="@(() => SetValue(null))" class="number-control">X</div>
+            </div>  
+        </MudContainer>
+    }
+    else
+    {
+        <p>Congratulations! You solved the puzzle!</p>
+        <MudButton OnClick="StartNewGame">Play Again</MudButton>
+    }
+    <MudButton Class="mt-3" OnClick="StartNewGame">New Game</MudButton>
+</MudContainer>

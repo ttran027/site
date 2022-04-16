@@ -1,0 +1,10 @@
+﻿<MudContainer Class="d-flex flex-column align-end">   
+    @if (Price is null)
+    {
+        <MudText>Unavailable</MudText>
+    }else
+    {
+        <MudText Style="min-width: max-content;">@($"{Price.Price?.ToPrice()} {Price.Base}")</MudText>
+        <MudText>@GetPercent(Price.PercentChange24Hour)</MudText>
+        }            
+</MudContainer>            

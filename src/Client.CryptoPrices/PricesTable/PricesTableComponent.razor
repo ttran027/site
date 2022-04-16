@@ -1,0 +1,39 @@
+﻿<MudTable ServerData="@GetItems"
+          T="CryptoInfo"
+          Elevation="0"
+          RowsPerPage="5" 
+          Hover="true" 
+          Style="background-color: inherit; max-width: 390px !important; width: auto !important; min-width: 350px !important;" 
+          Breakpoint="Breakpoint.Sm"
+          Class="fit-content"
+          @ref="@_table">
+    <ToolBarContent>
+            <MudTextField @bind-Value="@SearchString"
+                      Immediate 
+                      Clearable 
+                      DebounceInterval="300" 
+                      Placeholder="Search for crypto prices" 
+                      Adornment="Adornment.Start" 
+                      AdornmentIcon="@Icons.Material.Filled.Search" 
+                      Variant="Variant.Outlined"
+                      IconSize="Size.Medium" 
+                      Class="mb-5"
+                      OnDebounceIntervalElapsed="OnSearch"></MudTextField>      
+    </ToolBarContent>
+    <RowTemplate>
+        <MudTd Class="d-flex flex-row px-0">
+            <MudContainer Class="d-flex flex-column pa-0">
+                <MudText>@context.Name</MudText>                       
+                @if (context.Symbol is not null)
+                {
+                    <MudText Style="min-width: max-content;" Color="Color.Secondary">@context.Symbol</MudText>
+                }                    
+            </MudContainer>
+            <MudSpacer/>
+            <CryptoPriceComponent Crypto="@context"/>                          
+        </MudTd>
+    </RowTemplate>
+    <PagerContent >
+        <MudTablePager HideRowsPerPage/>
+    </PagerContent>
+</MudTable>

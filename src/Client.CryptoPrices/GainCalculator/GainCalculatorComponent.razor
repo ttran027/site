@@ -1,0 +1,59 @@
+﻿@page "/calculators"
+@using Client.Contract.Interfaces
+@using Client.CryptoPrices.PricesTable
+
+<PageTitleComponent Title="Calculators"/>
+
+<MudContainer Class="d-flex flex-column pa-0 align-center" MaxWidth="MaxWidth.ExtraSmall">
+    <MudContainer Class="d-flex flex-row pa-0">
+        <MudContainer Class="d-flex flex-column pa-3 align-start">
+            <MudNumericField Class="mb-2" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" @bind-Value="State.Input.PurchasedPrice" Label="Purchased Price" HideSpinButtons Immediate DebounceInterval="300" OnDebounceIntervalElapsed="Calculate"/>
+            <MudNumericField Class="mb-2" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" @bind-Value="State.Input.SellPrice" Label="Selling Price" HideSpinButtons Immediate DebounceInterval="300" OnDebounceIntervalElapsed="Calculate"/>                   
+        </MudContainer>
+        <MudContainer Class="d-flex pa-3 flex-column">
+            <MudNumericField Class="mb-2" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" @bind-Value="State.Input.Amount" Label="Amount" HideSpinButtons Immediate DebounceInterval="300" OnDebounceIntervalElapsed="Calculate"/>
+            <MudText Typo="Typo.h6" Class="mb-2">@State.Output.GetFinal().ToString("C")</MudText>
+            @((State.Output.GainRate*100).ToPercent(Typo.body1))
+        </MudContainer>
+    </MudContainer>
+    <PricesTableComponent />
+</MudContainer>
+
+@code {
+    private GainCalculatorCache State = new(new(), new());
+    private static string CacheKey => CryptoConstants.CacheKey("calculator");
+
+    [Parameter]
+    public string Class { get; set; } = string.Empty;
+
+    [Inject]
+    private ICacheService CacheService { get; set; } = null!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await CacheService.GetAsync<GainCalculatorCache>(CacheKey);
+        if (result.IsSuccess)
+        {
+            State = result.Value;
+        }
+    }
+
+    private async Task Calculate()
+    {
+        var validator = new GainCalculatorInputValidator();
+        var validationResult = validator.Validate(State.Input);
+        if (validationResult.IsValid)
+        {
+            var gainRate = (State.Input.SellPrice - State.Input.PurchasedPrice)/State.Input.PurchasedPrice;
+            State.Output.Invesment = State.Input.Amount;
+            State.Output.GainRate = gainRate;
+            State.Output.Gain = gainRate * State.Input.Amount;
+        }
+        await SaveStateToCache();
+    }
+
+    private async Task SaveStateToCache()
+    {
+        await CacheService.SaveAsync(CacheKey, State);
+    }
+}
