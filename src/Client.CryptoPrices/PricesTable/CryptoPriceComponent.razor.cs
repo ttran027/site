@@ -61,7 +61,8 @@ namespace Client.CryptoPrices.PricesTable
                 if (p.IsSuccess)
                 {
                     await CacheService.SaveAsync(Key, p.Value);
-                    StateHasChanged();
+                    Price = p.Value;
+                    await InvokeAsync(StateHasChanged);
                 }
             }
         }
