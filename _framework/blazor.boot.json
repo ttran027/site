@@ -9,7 +9,7 @@
     "assembly": {
       "Blazored.LocalStorage.dll": "sha256-6RRoYeDP3d0xabXmcCMF66wXeJlXVPem28Trs8sQiis=",
       "Client.Contract.dll": "sha256-32+V7dSXxwjqQHxQV\/UtQJHRjkIQEkFel1AlLTxAl90=",
-      "Client.dll": "sha256-bkXAdvNxsPenFL0DUv3OBzKKy+1ZNZyVN\/2LJvvsq\/E=",
+      "Client.dll": "sha256-IzS1Aqq7Th0QF91mSW1ppOMaCRzIU3x55qxHCTmqoJE=",
       "Client.Shared.dll": "sha256-0js4BggYEskJjvdZdefqY8ooDJwAKu8T1Hfbho10zcI=",
       "FluentResults.dll": "sha256-kFcKOzs1g8Dl5a9r6NauzHq9SakTvs18aK4VySmcOVo=",
       "FluentValidation.dll": "sha256-NflrIQKcfYxeVjrVYw+AP1+xnZJp67Wq9L5Vsd5Cr\/8=",
@@ -64,7 +64,7 @@
     },
     "extensions": null,
     "lazyAssembly": {
-      "Client.CryptoPrices.dll": "sha256-lzobVCP925N11uNNNgjK+8ygjagbFSY4oY47zIZY1X4=",
+      "Client.CryptoPrices.dll": "sha256-1T\/O4Khrbi\/fRJikJ2LDN7JfBFdqJ1S1yGHrRhaf6qM=",
       "Client.Sudoku.dll": "sha256-zrFNW3t+Je3umreXcJVlZypIvBRh02JJcTBSQR+MGTA="
     },
     "libraryInitializers": null,

@@ -65,7 +65,7 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-lx2VP5+SPrzPgTHRH\/uQkmh8\/VClEw0gGm03hw7K0PE=",
+      "hash": "sha256-0unuJDfFlw4jLf8YF\/zdnJcy8nz5famkFYKVi6aO1oA=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -77,11 +77,11 @@
       "url": "_framework\/Client.Contract.dll"
     },
     {
-      "hash": "sha256-lzobVCP925N11uNNNgjK+8ygjagbFSY4oY47zIZY1X4=",
+      "hash": "sha256-1T\/O4Khrbi\/fRJikJ2LDN7JfBFdqJ1S1yGHrRhaf6qM=",
       "url": "_framework\/Client.CryptoPrices.dll"
     },
     {
-      "hash": "sha256-bkXAdvNxsPenFL0DUv3OBzKKy+1ZNZyVN\/2LJvvsq\/E=",
+      "hash": "sha256-IzS1Aqq7Th0QF91mSW1ppOMaCRzIU3x55qxHCTmqoJE=",
       "url": "_framework\/Client.dll"
     },
     {
@@ -305,5 +305,5 @@
       "url": "_content\/Client.Sudoku\/Client.Sudoku.bundle.scp.css"
     }
   ],
-  "version": "ILQ\/YscW"
+  "version": "PW6ReJeP"
 };
