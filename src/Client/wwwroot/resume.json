@@ -3,11 +3,11 @@
   "email": "tdtran04@gmail.com",
   "fullName": "Thinh Tran",
   "skills": [
-    "Proficient languages: C#, Typescript and HTML",
-    "Proficient frameworks: ASP .Net, Blazor and Angular",
-    "Proficient source control: Azure DevOps",
-    "Proficient IDE: Visual Studio and Visual Studio Code",
-    "Some experience in SQL"
+    "Proficient languages: C#, SQL, JavaScript and HTML,",
+    "Proficient frameworks: ASP .Net MVC, Blazor, Orleans and RabbitMQ",
+    "Proficient source control: Azure DevOps and GitHub",
+    "Proficient IDE: MS Visual Studio, VS Code and JetBrains Rider",
+    "Proficient in distributed programing"
   ],
   "educations": [
     {
@@ -33,6 +33,16 @@
   ],
   "experiences": [
     {
+      "company": "CKS Finiancial",
+      "location": {
+        "city": "Chesapeake",
+        "state": "VA"
+      },
+      "position": "Software Developer",
+      "startDate": "2022-03-01T00:00:00",
+      "endDate": null
+    },
+    {
       "company": "CDYNE Services",
       "location": {
         "city": "Chesapeake",
@@ -40,7 +50,7 @@
       },
       "position": "Software Developer",
       "startDate": "2021-12-16T00:00:00",
-      "endDate": null
+      "endDate": "2022-03-01T00:00:00"
     },
     {
       "company": "CDYNE Services",
