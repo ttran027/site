@@ -23,7 +23,8 @@
 @code {
     [Inject]
     ISoccerService SoccerService { get; set; } = null!;
-
+    [Inject]
+    IJSRuntime JsRuntime { get; set; } = null!;
     private League? Data;
     private string Error = string.Empty;
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -33,7 +34,8 @@
             var result = await SoccerService.GetLeagueData();
             if (result.IsSuccess)
             {
-                Data = result.Value;
+                Data = result.Value;var module = await JsRuntime.InvokeAsync<IJSObjectReference>("import","./js/soccer.js");
+                await module.InvokeVoidAsync("initPage", result.Value);
             }
             else
             {
@@ -42,5 +44,4 @@
             await InvokeAsync(StateHasChanged);
         }
     }
-
 }
