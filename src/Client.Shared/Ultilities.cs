@@ -25,5 +25,12 @@ namespace Client.Shared
             builder.AddAttribute(3, "ChildContent", (RenderFragment)(builder2 => { builder2.AddContent(4, price + "%"); }));
             builder.CloseComponent();
         };
+        public static DateTime UnixTimeStampToDateTime(double unixTimeStamp )
+        {
+            // Unix timestamp is seconds past epoch
+            DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            dateTime = dateTime.AddSeconds(unixTimeStamp).ToLocalTime();
+            return dateTime;
+        }
     }
 }

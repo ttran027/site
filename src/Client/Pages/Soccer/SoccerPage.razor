@@ -1,0 +1,46 @@
+@page "/soccer"
+@using Client.Shared.Services
+@using Client.Shared.Models
+<PageTitleComponent Title="Soccer"/>
+
+@if (!string.IsNullOrWhiteSpace(Error))
+{
+    <div>Error: @Error</div>
+}
+
+@if (Data != null)
+{
+    foreach (var match in Data.Matches)
+    {
+        <div class="d-flex flex-column mb-2">
+            <span>@match.Home.Name vs @match.Away.Name</span>
+            <span>@match.Home.Goals.Length - @match.Away.Goals.Length</span>
+            <span>@match.KickOffTime.ToString("d")</span>
+        </div>
+    }
+}
+
+@code {
+    [Inject]
+    ISoccerService SoccerService { get; set; } = null!;
+
+    private League? Data;
+    private string Error = string.Empty;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var result = await SoccerService.GetLeagueData();
+            if (result.IsSuccess)
+            {
+                Data = result.Value;
+            }
+            else
+            {
+                Error = string.Join(";", result.Errors);
+            }
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+}
